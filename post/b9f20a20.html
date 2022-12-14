@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+  
+  <meta name="baidu-site-verification" content="code-J1Qg17G6wT" />
+  <title>webpack - 就像风住了风</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="就像风住了风个人博客">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+    <!-- Site Verification -->
+    <meta name="baidu-site-verification" content="code-jK4ueJU3s4" />
+
+  <link rel="shortcut icon" href="/images/head/head.jpg" type="image/png" />
+  <meta name="description" content="webpack 是一个用于现代 JavaScript 应用程序的 静态模块打包工具。当 webpack 处理应用程序时，它会在内部从一个或多个入口点构建一个 依赖图(dependency graph)，然后将你项目中所需的每一个模块组合成一个或多个 bundles，它们均为静态资源，用于展示你的内容。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack">
+<meta property="og:url" content="http://example.com/post/b9f20a20.html">
+<meta property="og:site_name" content="就像风住了风">
+<meta property="og:description" content="webpack 是一个用于现代 JavaScript 应用程序的 静态模块打包工具。当 webpack 处理应用程序时，它会在内部从一个或多个入口点构建一个 依赖图(dependency graph)，然后将你项目中所需的每一个模块组合成一个或多个 bundles，它们均为静态资源，用于展示你的内容。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/Users/zhangyuxuan/Downloads/2021-01-08-webpack-02/%E8%AF%BE%E4%BB%B6/assets/webpack_description_2-8906168.jpg">
+<meta property="og:image" content="http://example.com/Users/zhangyuxuan/Downloads/2021-01-08-webpack-02/%E8%AF%BE%E4%BB%B6/assets/workflow.png">
+<meta property="article:published_time" content="2022-12-06T12:38:27.000Z">
+<meta property="article:modified_time" content="2022-12-11T04:29:01.147Z">
+<meta property="article:author" content="diangen">
+<meta property="article:tag" content="webpack">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/Users/zhangyuxuan/Downloads/2021-01-08-webpack-02/%E8%AF%BE%E4%BB%B6/assets/webpack_description_2-8906168.jpg">
+  <link rel="stylesheet" href="https://lib.baomitu.com/highlight.js/9.15.8/styles/atom-one-dark.min.css" crossorigin>
+  <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css">
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+  <link rel="stylesheet" href="/lib/fancybox/css/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://lib.baomitu.com/justifiedGallery/3.8.1/css/justifiedGallery.min.css">
+  
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_2421060_8z08qcz5sq3.css">
+  
+  <link rel="stylesheet" href="/css/style.css?v=1671030751569">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(/images/background/xiaomai.jpg)"></div>
+    <div class="nexmoe-small" style="background-image: url(/images/background/lihui.png)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="diangen" class="mdui-btn mdui-btn-icon"><img src="/images/head/head.jpg" alt="diangen"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="diangen">
+            <img src="/images/head/head.jpg" alt="diangen" alt="diangen">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div class="nexmoe-count-item"><span>文章</span>4 <div class="item-radius"></div><div class="item-radius item-right"></div> </div>
+        <div class="nexmoe-count-item"><span>标签</span>3<div class="item-radius"></div><div class="item-radius item-right"></div></div>
+        <div class="nexmoe-count-item"><span>分类</span>2<div class="item-radius"></div><div class="item-radius item-right"></div></div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-meishi"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archives.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-hanbao1"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于我的">
+            <i class="mdui-list-item-icon nexmoefont icon-jiubei1"></i>
+            <div class="mdui-list-item-content">
+                关于我的
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/friend.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-cola"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/download.html" title="下载中心">
+            <i class="mdui-list-item-icon nexmoefont icon-tangguo"></i>
+            <div class="mdui-list-item-content">
+                下载中心
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  
+<!-- 站内搜索 -->
+
+<div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search" >
+        <form id="search-form">
+            <label><input type="text" id="local-search-input" name="q" results="0" placeholder="站内搜索" class="input form-control" autocomplete="off" autocorrect="off"/></label>
+            <!-- 清空/重置搜索框 -->
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+        </form>
+    </div>
+    <div id="local-search-result"></div> <!-- 搜索结果区 -->
+    <!-- <p class='no-result'></p> 无匹配时显示，注意在 CSS 中设置默认隐藏 -->
+</div>
+
+
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="/1113969983@qq.com" target="_blank" mdui-tooltip="{content: 'mail'}" style="color: rgb(249,8,8);background-color: rgba(249,8,8,.1);">
+            <i class="nexmoefont icon-mail-fill"></i>
+        </a><a class="mdui-ripple" href="https://blog.csdn.net/qq_41961239?type=blog" target="_blank" mdui-tooltip="{content: 'CSDN'}" style="color: rgb(199,29,35);background-color: rgba(199,29,35,.1);">
+            <i class="nexmoefont icon-csdn"></i>
+        </a><a class="mdui-ripple" href="https://github.com/explore" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a><a class="mdui-ripple" href="https://gitee.com/chao-diangen/projects" target="_blank" mdui-tooltip="{content: 'gitee'}" style="color: rgb(255, 255, 255);background-color: rgb(199,29,35);">
+            <i class="nexmoefont icon-mayun"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/webpack/">webpack</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/前端/">前端</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/vue/" style="font-size: 20px;">vue</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
+    </div>
+    
+  </div>
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+<style>
+.nexmoe-widget .archive-list-count{
+	position : absolute;
+	right: 15px;
+	top:9px;
+	color: #DDD;
+}
+</style>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 diangen
+        <br/>
+        <br/>
+        
+        <div style="font-size: 12px">
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            本站总访问量  <a id="busuanzi_value_site_pv"></a> 次<br />
+            本站访客数<a id="busuanzi_value_site_uv"></a>人次
+        </div>
+        
+        
+    </div>
+
+</div><!-- .nexmoe-drawer -->
+
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+    
+        <div class="nexmoe-post-cover" style="padding-bottom: 26.666666666666668%;">
+            <img data-src="https://www.runoob.com/wp-content/uploads/2017/01/32af52ff9594b121517ecdd932644da4.png" data-sizes="auto" alt="webpack" class="lazyload">
+            <h1>webpack</h1>
+        </div>
+    
+
+        <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年12月06日</a>
+    <a><i class="nexmoefont icon-areachart"></i>5.4k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 25 分钟</a>
+</div>
+
+        <div class="nexmoe-post-right">
+            
+                <div class="nexmoe-fixed">
+                    <div class="nexmoe-valign">
+                        <div class="nexmoe-toc">
+                            
+                            
+                                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#webpack"><span class="toc-number">1.</span> <span class="toc-text">webpack</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81webpack-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">1、webpack 是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85"><span class="toc-number">1.2.</span> <span class="toc-text">2、安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E4%BD%BF%E7%94%A8"><span class="toc-number">1.3.</span> <span class="toc-text">3、使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E6%89%93%E5%8C%85%E6%A8%A1%E5%9D%97"><span class="toc-number">1.4.</span> <span class="toc-text">4、打包模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1%E3%80%81%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6"><span class="toc-number">1.4.1.</span> <span class="toc-text">4 - 1、入口文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2%E3%80%81%E6%89%93%E5%8C%85%E5%91%BD%E4%BB%A4"><span class="toc-number">1.4.2.</span> <span class="toc-text">4 - 2、打包命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E6%89%93%E5%8C%85%E9%85%8D%E7%BD%AE"><span class="toc-number">1.5.</span> <span class="toc-text">5、打包配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1%E3%80%81mode"><span class="toc-number">1.5.1.</span> <span class="toc-text">5 - 1、mode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2%E3%80%81entry"><span class="toc-number">1.5.2.</span> <span class="toc-text">5 - 2、entry</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3%E3%80%81output"><span class="toc-number">1.5.3.</span> <span class="toc-text">5 - 3、output</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81%E6%B7%B1%E5%85%A5"><span class="toc-number">1.6.</span> <span class="toc-text">6、深入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1%E3%80%81%E6%89%A7%E8%A1%8C%E7%AE%80%E8%A6%81%E6%B5%81%E7%A8%8B"><span class="toc-number">1.6.1.</span> <span class="toc-text">6 - 1、执行简要流程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%E3%80%81Loaders"><span class="toc-number">1.7.</span> <span class="toc-text">7、Loaders</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1%E3%80%81raw-loader"><span class="toc-number">1.7.1.</span> <span class="toc-text">7 - 1、raw-loader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2%E3%80%81file-loader"><span class="toc-number">1.7.2.</span> <span class="toc-text">7 - 2、file-loader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3%E3%80%81css-loader"><span class="toc-number">1.7.3.</span> <span class="toc-text">7 - 3、css-loader</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4%E3%80%81style-loader"><span class="toc-number">1.7.4.</span> <span class="toc-text">7 - 4、style-loader</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%E3%80%81Plugins"><span class="toc-number">1.8.</span> <span class="toc-text">8、Plugins</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1%E3%80%81HtmlWebpackPlugin"><span class="toc-number">1.8.1.</span> <span class="toc-text">8 - 1、HtmlWebpackPlugin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2%E3%80%81clean-webpack-plugin"><span class="toc-number">1.8.2.</span> <span class="toc-text">8 - 2、clean-webpack-plugin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3%E3%80%81mini-css-extract-plugin"><span class="toc-number">1.8.3.</span> <span class="toc-text">8 - 3、mini-css-extract-plugin</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9%E3%80%81WebpackDevServer"><span class="toc-number">1.9.</span> <span class="toc-text">9、WebpackDevServer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1%E3%80%81Proxy"><span class="toc-number">1.9.1.</span> <span class="toc-text">9 - 1、Proxy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2%E3%80%81Hot-Module-Replacement"><span class="toc-number">1.9.2.</span> <span class="toc-text">9 - 2、Hot Module Replacement</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10%E3%80%81sourceMap"><span class="toc-number">1.10.</span> <span class="toc-text">10、sourceMap</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Tip"><span class="toc-number">1.10.0.0.0.1.</span> <span class="toc-text">Tip</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11%E3%80%81Code-Spliting"><span class="toc-number">1.11.</span> <span class="toc-text">11、Code Spliting</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-1%E3%80%81%E5%85%A5%E5%8F%A3%E8%B5%B7%E7%82%B9"><span class="toc-number">1.11.1.</span> <span class="toc-text">11 - 1、入口起点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-2%E3%80%81%E9%98%B2%E6%AD%A2%E9%87%8D%E5%A4%8D"><span class="toc-number">1.11.2.</span> <span class="toc-text">11 - 2、防止重复</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#11-2-1%E3%80%81SplitChunksPlugin"><span class="toc-number">1.11.2.1.</span> <span class="toc-text">11 - 2 - 1、SplitChunksPlugin</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-3%E3%80%81%E5%8A%A8%E6%80%81%E5%AF%BC%E5%85%A5"><span class="toc-number">1.11.3.</span> <span class="toc-text">11 - 3、动态导入</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12%E3%80%81%E9%A2%84%E5%8A%A0%E8%BD%BD-x2F-%E9%A2%84%E8%8E%B7%E5%8F%96"><span class="toc-number">1.12.</span> <span class="toc-text">12、预加载&#x2F;预获取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13%E3%80%81%E5%A4%96%E9%83%A8%E6%89%A9%E5%B1%95"><span class="toc-number">1.13.</span> <span class="toc-text">13、外部扩展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14%E3%80%81tree-shaking"><span class="toc-number">1.14.</span> <span class="toc-text">14、tree shaking</span></a></li></ol></li></ol>
+                            
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+
+        <article>
+            <p>webpack 是一个用于现代 JavaScript 应用程序的 静态模块打包工具。当 webpack 处理应用程序时，它会在内部从一个或多个入口点构建一个 依赖图(dependency graph)，然后将你项目中所需的每一个模块组合成一个或多个 bundles，它们均为静态资源，用于展示你的内容。</p>
+<span id="more"></span>
+<h1 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h1><p>[toc]</p>
+<h2 id="1、webpack-是什么？"><a href="#1、webpack-是什么？" class="headerlink" title="1、webpack 是什么？"></a>1、webpack 是什么？</h2><ul>
+<li>官⽅方⽹网站:<a target="_blank" rel="noopener" href="https://webpack.js.org/">https://webpack.js.org/</a></li>
+<li>中⽂文⽹网站:<a target="_blank" rel="noopener" href="https://www.webpackjs.com/">https://www.webpackjs.com/</a></li>
+</ul>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="/Users/zhangyuxuan/Downloads/2021-01-08-webpack-02/%E8%AF%BE%E4%BB%B6/assets/webpack_description_2-8906168.jpg" alt="image-20191014165344746" class="lazyload"></p>
+<p>本质上，<code>webpack</code> 是一个现代 <code>JavaScript</code> 应用程序的静态模块打包器(module bundler)。当 webpack 处理应用程序时，它会递归地构建一个依赖关系图(dependency graph)，其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个 bundle。</p>
+<h2 id="2、安装"><a href="#2、安装" class="headerlink" title="2、安装"></a>2、安装</h2><p><code>webpack</code> 是一个使用 <code>Node.js</code> 实现的一个模块化代码打包工具。所以，我们需要先安装 webpack，安装之前需要搭建好 <code>Node.js</code> 环境</p>
+<pre><code class="shell"> npm install -D webpack webpack-cli
+</code></pre>
+<blockquote>
+<p>注：不推荐全局安装</p>
+</blockquote>
+<p><code>webpack-cli</code> : 提供 webpack 命令、工具，类似 <code>create-react-app</code></p>
+<p><code>webpack</code> : webpack 代码，类似 <code>react</code></p>
+<h2 id="3、使用"><a href="#3、使用" class="headerlink" title="3、使用"></a>3、使用</h2><pre><code class="bash">./node_modules/.bin/webpack
+
+// 查看版本
+./node_modules/.bin/webpack -v
+</code></pre>
+<p>也可以编辑 <code>package.json</code> 的 <code>scripts</code> 来简化输入</p>
+<pre><code class="json">// package.json
+&#123;
+    ...,
+    &quot;scripts&quot;: &#123;
+        &quot;start&quot;: &quot;webpack&quot;	// scripts 中可以定位到 ./node_modules/.bin/ 目录下
+    &#125;
+&#125;
+</code></pre>
+<blockquote>
+<p><code>scripts</code> 中使用 <code>test</code>、<code>start</code>、<code>restart</code>、<code>stop</code> 命名的时候，可以在调用的时候省略 <code>run</code>，即直接 <code>npm start</code></p>
+</blockquote>
+<p>当然，还可以使用更加方便的方式：</p>
+<pre><code class="bash">npx webpack
+</code></pre>
+<p>通过 <code>npx</code> 也可以帮助我们定位命令到 <code>./node_modules/.bin/</code> 目录下</p>
+<blockquote>
+<p>注：npm5.2+ 增加，如果没有，可以使用 npm i -g npx 来安装</p>
+</blockquote>
+<h2 id="4、打包模块"><a href="#4、打包模块" class="headerlink" title="4、打包模块"></a>4、打包模块</h2><p>打包之前，我们需要了解一个概念，入口文件</p>
+<h3 id="4-1、入口文件"><a href="#4-1、入口文件" class="headerlink" title="4 - 1、入口文件"></a>4 - 1、入口文件</h3><p>入口文件就是我们项目中加载的第一个文件，比如上面的 <code>main.js</code> 文件，其它文件都是通过 <code>import</code> 等方式引入的，<code>webpack</code> 会从我们指定的入口文件开始分析所有需要依赖的文件，然后把打包成一个完整文件。</p>
+<h3 id="4-2、打包命令"><a href="#4-2、打包命令" class="headerlink" title="4 - 2、打包命令"></a>4 - 2、打包命令</h3><pre><code class="bash">webpack ./js/index.js
+</code></pre>
+<p>上面命令会使用 <code>webpack</code> 默认的一些配置对模块文件进行打包，并把打包后的文件输出到默认创建的 <code>./dist</code> 目录下，打包后的文件名称默认为 <code>main.js</code>。</p>
+<p>模块文件打包以后，就可以在不支持 es6 模块语法的浏览器环境下引入使用了。</p>
+<p><strong>打包文件分析</strong></p>
+<ul>
+<li>把分散的模块文件打包到一个文件中，不需要外部引入了</li>
+<li>内置了一个小型模块加载器(类似 <code>requireJS</code>)，实现了打包后的代码隔离与引用</li>
+</ul>
+<p>以上就是 webpack 最基础的使用于基本原理，当然强大的 <code>webpack</code> 远远不止这些功能。</p>
+<h2 id="5、打包配置"><a href="#5、打包配置" class="headerlink" title="5、打包配置"></a>5、打包配置</h2><p>虽然，我们可以直接通过命令的来打包，但是推荐创建一个 <code>webpack.config.js</code> 的配置文件来实现更方便和强大的功能。</p>
+<p><code>webpack</code> 命令在运行的时候，默认会读取运行命令所在的目录下的 <code>webpack.config.js</code> 文件，通常我们会在项目的根目录下运行命令和创建配置文件。</p>
+<p>我们也可以通过 <code>—config</code> 选项来指定配置文件路径：</p>
+<pre><code class="shell">webpack --config ./configs/my_webpack.config.js
+</code></pre>
+<p>通常情况下，我们的项目目录大致如下：</p>
+<pre><code class="txt">/
+-- /dist - 项目打包后存放目录
+-- /node_modules - 第三方模块
+-- /src
+------ css/
+------ images/
+------ js/
+------ index.js
+-- webpack.config.js
+-- package.json
+</code></pre>
+<p>配置文件</p>
+<pre><code class="javascript">module.exports = &#123;
+  ...	//配置项
+&#125;
+</code></pre>
+<h3 id="5-1、mode"><a href="#5-1、mode" class="headerlink" title="5 - 1、mode"></a>5 - 1、mode</h3><p>模式 : <code>&quot;production&quot; | &quot;development&quot; | &quot;none&quot;</code></p>
+<p>不同的模式会对 <code>webpack</code> 打包的时候进行一些对应的优化配置。</p>
+<pre><code class="bash">module.exports = &#123;
+  mode: &#39;production&#39;
+&#125;
+</code></pre>
+<h3 id="5-2、entry"><a href="#5-2、entry" class="headerlink" title="5 - 2、entry"></a>5 - 2、entry</h3><p>指定打包⼊口⽂文件，有三种不同的形式：<code>string | object | array</code></p>
+<!--一对一：一个入口、一个打包文件-->
+
+<pre><code class="js">module.exports = &#123;
+  entry: &#39;./src/index.js&#39;
+&#125;
+</code></pre>
+<!--多对一：多个入口、一个打包文件-->
+
+<pre><code class="js">module.exports = &#123;
+  entry: [
+    &#39;./src/index1.js&#39;,
+    &#39;./src/index2.js&#39;,
+  ]
+&#125;
+</code></pre>
+<!--多对多：多个入口、多打包文件-->
+
+<pre><code class="js">module.exports = &#123;
+  entry: &#123;
+    &#39;index1&#39;: &quot;./src/index1.js&quot;,
+    &#39;index2&#39;: &quot;./src/index2.js&quot;
+  &#125;
+&#125;
+</code></pre>
+<h3 id="5-3、output"><a href="#5-3、output" class="headerlink" title="5 - 3、output"></a>5 - 3、output</h3><p>打包后的文件位置</p>
+<pre><code class="js">module.exports = &#123;
+  ...,
+  output: &#123;
+      path: path.resolve(__dirname, &quot;dist&quot;),
+    filename: &quot;bundle.js&quot;,
+        filename: &quot;[name].js&quot;
+    &#125;
+&#125;
+</code></pre>
+<ul>
+<li>可以指定一个固定的文件名称，如果是多入口多出口(<code>entry</code> 为对象)，则不能使用单文件出口，需要使用下面的方式</li>
+<li>通过 <code>webpack</code> 内置的变量占位符：<code>[name]</code></li>
+<li><a target="_blank" rel="noopener" href="https://webpack.docschina.org/configuration/output/#template-strings">https://webpack.docschina.org/configuration/output/#template-strings</a></li>
+</ul>
+<h2 id="6、深入"><a href="#6、深入" class="headerlink" title="6、深入"></a>6、深入</h2><p>在 <code>webpack</code> 中，有一个很重要的特性：模块不仅仅只是 <code>js</code> 的文件，<code>webpack</code> 可以把任意文件数据作为模块进行处理，包括：非 js 文本、css、图片等等</p>
+<pre><code class="javascript">import txt from &#39;./a.txt&#39;;
+console.log(txt);
+</code></pre>
+<p>但是 <code>webpack</code> 默认情况下只能处理 <code>js</code> 模块，如果需要处理其它类型的模块，则需要使用它提供的一些其它功能</p>
+<h3 id="6-1、执行简要流程"><a href="#6-1、执行简要流程" class="headerlink" title="6 - 1、执行简要流程"></a>6 - 1、执行简要流程</h3><p><img data-fancybox="gallery" data-sizes="auto" data-src="/Users/zhangyuxuan/Downloads/2021-01-08-webpack-02/%E8%AF%BE%E4%BB%B6/assets/workflow.png" alt="workflow" class="lazyload"></p>
+<ul>
+<li><code>loaders</code>：<code>webpack</code> 中灰常核心的内容之一，前面我们说的非 js 类型的模块处理就靠它了。webpack 可以使用 loader 来预处理文件。这允许你打包除 JavaScript 之外的任何静态资源。你可以使用 Node.js 来很简单地编写自己的 loader。</li>
+<li><code>plugins</code>：<code>webpack</code> 中另外一个核心的内容，它主要是扩展 <code>webpack</code> 本身的一些功能。插件可以运行在 <code>webpack</code> 的不同阶段（钩子 &#x2F; 生命周期）。</li>
+</ul>
+<h2 id="7、Loaders"><a href="#7、Loaders" class="headerlink" title="7、Loaders"></a>7、Loaders</h2><p><a target="_blank" rel="noopener" href="https://webpack.js.org/loaders/">https://webpack.js.org/loaders/</a></p>
+<pre><code class="js">module.exports = &#123;
+  ...,
+  module: &#123;
+      rules:[
+          &#123;
+              test:/\.xxx$/,
+           use:&#123;
+            loader: &#39;xxx-load&#39;
+          &#125;
+            &#125;
+      ]
+    &#125;
+&#125;
+</code></pre>
+<p>当 <code>webpack</code> 碰到不识别的模块的时候，<code>webpack</code> 会在配置的 <code>module</code> 中进行该文件解析规则的查找</p>
+<ul>
+<li><code>rules</code> 就是我们为不同类型的文件定义的解析规则对应的 loader，它是一个数组</li>
+<li>每一种类型规则通过 test 选项来定义，通过正则进行匹配，通常我们会通过正则的方式来匹配文件后缀类型</li>
+<li><code>use</code> 针对匹配到文件类型，调用对应的 <code>loader</code> 进行处理</li>
+</ul>
+<h3 id="7-1、raw-loader"><a href="#7-1、raw-loader" class="headerlink" title="7 - 1、raw-loader"></a>7 - 1、raw-loader</h3><p>在 webpack 中通过 import 方式导入文件内容，loader 并不是 webpack 内置的，所以首先要安装</p>
+<pre><code class="bash">npm install --save-dev raw-loader
+</code></pre>
+<p>然后在 webpack.config.js 中进行配置</p>
+<pre><code class="javascript">module.exports = &#123;
+  ...,
+  module: &#123;
+      rules: [
+      &#123;
+        test: /\.(txt|md)$/,
+        use: &#39;raw-loader&#39;
+        &#125;
+    ]
+    &#125;
+&#125;
+</code></pre>
+<h3 id="7-2、file-loader"><a href="#7-2、file-loader" class="headerlink" title="7 - 2、file-loader"></a>7 - 2、file-loader</h3><p>把识别出的资源模块，移动到指定的输出⽬目录，并且返回这个资源在输出目录的地址(字符串)</p>
+<pre><code class="bash">npm install --save-dev file-loader
+</code></pre>
+<pre><code class="javascript">rules: [
+  ...,
+    &#123;
+        test: /\.(png|jpe?g|gif)$/,
+    use: &#123;
+      loader: &quot;file-loader&quot;,
+      options: &#123;
+        // placeholder 占位符 [name] 源资源模块的名称
+        // [ext] 源资源模块的后缀
+        name: &quot;[name]_[hash].[ext]&quot;,
+        //打包后的存放位置
+        outputPath: &quot;./images&quot;,
+        // 打包后文件的 url
+        publicPath: &#39;./images&#39;,
+      &#125;
+    &#125;
+    &#125;
+]
+</code></pre>
+<blockquote>
+<p>占位符：<a target="_blank" rel="noopener" href="https://webpack.js.org/loaders/file-loader#placeholders">https://webpack.js.org/loaders/file-loader#placeholders</a></p>
+</blockquote>
+<h3 id="7-3、css-loader"><a href="#7-3、css-loader" class="headerlink" title="7 - 3、css-loader"></a>7 - 3、css-loader</h3><p>分析 <code>css</code> 模块之间的关系，并合成⼀个 <code>css</code></p>
+<pre><code class="bash">npm install --save-dev css-loader
+</code></pre>
+<pre><code class="js">rules: [
+  ...,
+    &#123;
+        test: /\.css$/,
+    use: &#123;
+      loader: &quot;css-loader&quot;,
+      options: &#123;
+              // 启用/禁用 url() 处理
+              url: true,
+              // 启用/禁用 @import 处理
+              import: true,
+        // 启用/禁用 Sourcemap
+        sourceMap: false
+      &#125;
+    &#125;
+    &#125;
+]
+</code></pre>
+<h3 id="7-4、style-loader"><a href="#7-4、style-loader" class="headerlink" title="7 - 4、style-loader"></a>7 - 4、style-loader</h3><p>把 <code>css-loader</code> 生成的内容，用 <code>style</code> 标签挂载到⻚面的 <code>head</code> 中</p>
+<pre><code class="bash">npm install --save-dev style-loader
+</code></pre>
+<pre><code class="js">rules: [
+  ...,
+    &#123;
+        test: /\.css$/,
+    use: [&quot;style-loader&quot;, &quot;css-loader&quot;]
+    &#125;
+]
+</code></pre>
+<p>同一个任务的 <code>loader</code> 可以同时挂载多个，处理顺序为：从右到左，也就是先通过 <code>css-loader</code> 处理，然后把处理后的 <code>css</code> 字符串交给 <code>style-loader</code> 进行处理</p>
+<pre><code class="js">rules: [
+  ...,
+    &#123;
+        test: /\.css$/,
+    use: [
+          &#123;
+              loader: &#39;style-loader&#39;,
+              options: &#123;&#125;
+          &#125;,
+      &#39;css-loader&#39;
+        ]
+    &#125;
+]
+</code></pre>
+<h2 id="8、Plugins"><a href="#8、Plugins" class="headerlink" title="8、Plugins"></a>8、Plugins</h2><p>扩展 <code>webpack</code> 本身的一些功能，它们会运行在 <code>webpack</code> 的不同阶段（钩子 &#x2F; 生命周期）。webpack 自身也是构建于你在 webpack 配置中用到的<strong>相同的插件系统</strong>之上！</p>
+<p>插件目的在于解决 <a target="_blank" rel="noopener" href="https://webpack.docschina.org/concepts/loaders">loader</a> 无法实现的<strong>其他事</strong>。</p>
+<h3 id="8-1、HtmlWebpackPlugin"><a href="#8-1、HtmlWebpackPlugin" class="headerlink" title="8 - 1、HtmlWebpackPlugin"></a>8 - 1、HtmlWebpackPlugin</h3><p>在打包结束后，⾃动生成⼀个 <code>html</code> ⽂文件，并把打包生成的 js 模块引⼊到该 <code>html</code> 中</p>
+<pre><code class="bash">npm install --save-dev html-webpack-plugin
+</code></pre>
+<pre><code class="js">// webpack.config.js
+const HtmlWebpackPlugin = require(&quot;html-webpack-plugin&quot;);
+module.exports = &#123;
+    ...
+  plugins: [
+     new HtmlWebpackPlugin(&#123;
+       title: &quot;My App&quot;,
+       filename: &quot;app.html&quot;,
+       template: &quot;./src/html/index.html&quot;
+     &#125;) 
+  ]
+&#125;;
+</code></pre>
+<pre><code class="html">&lt;!--./src/html/index.html--&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+    &lt;title&gt;&lt;%=htmlWebpackPlugin.options.title%&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;html-webpack-plugin&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>在 <code>html</code> 模板中，可以通过 <code>&lt;%=htmlWebpackPlugin.options.XXX%&gt;</code> 的方式获取配置的值</p>
+<p><strong>更多的配置</strong></p>
+<ul>
+<li><code>title</code>: ⽤来生成⻚面的 <code>title</code> 元素</li>
+<li><code>filename</code>: 输出的 <code>HTML</code> ⽂件名，默认是 <code>index.html</code>， 也可以直接配置子目录</li>
+<li><code>template</code>: 模板⽂件路径，⽀持加载器（<code>loader</code>），⽐如 <code>html!./index.html</code></li>
+<li><code>inject</code>: <code>true | &#39;head&#39; | &#39;body&#39; | false</code>，注⼊所有的资源到特定的 <code>template</code> 或者 <code>templateContent</code> 中，如果设置为 <code>true</code> 或者 <code>body</code>，所有的 <code>javascript</code> 资源将被放置到 <code>body</code> 元素的底部，<code>&#39;head&#39;</code> 将放置到 <code>head</code> 元素中</li>
+<li><code>favicon</code>: 添加特定的 <code>favicon</code> 路径到输出的 <code>HTML</code> 文件中</li>
+<li><code>minify</code>: <code>&#123;&#125; | false</code>， 传递 <code>html-minifier</code> 选项给 <code>minify</code> 输出</li>
+<li><code>hash</code>: <code>true | false</code>，如果为 <code>true</code>，将添加 <code>webpack</code> 编译生成的 <code>hash</code> 到所有包含的脚本和 <code>CSS</code> ⽂件，对于解除 <code>cache</code> 很有用</li>
+<li><code>cache</code>: <code>true | false</code>，如果为 <code>true</code>，这是默认值，仅在文件修改之后才会发布文件</li>
+<li><code>showErrors</code>: <code>true | false</code>，如果为 <code>true</code>，这是默认值，错误信息会写入到 <code>HTML</code> ⻚面中</li>
+<li><code>chunks</code>: 允许只添加某些块 (⽐如，仅 unit test 块)</li>
+<li><code>chunksSortMode</code>: 允许控制块在添加到⻚面之前的排序方式，⽀持的值:<code>&#39;none&#39; | &#39;default&#39; |&#123;function&#125;-default:&#39;auto&#39;</code></li>
+<li><code>excludeChunks</code>: 允许跳过某些块，(⽐如，跳过单元测试的块)</li>
+</ul>
+<h3 id="8-2、clean-webpack-plugin"><a href="#8-2、clean-webpack-plugin" class="headerlink" title="8 - 2、clean-webpack-plugin"></a>8 - 2、clean-webpack-plugin</h3><p>删除（清理）构建目录</p>
+<pre><code class="bash">npm install --save-dev clean-webpack-plugin
+</code></pre>
+<pre><code class="js">const &#123;CleanWebpackPlugin&#125; = require(&#39;clean-webpack-plugin&#39;);
+module.exports = &#123;
+    ...
+  plugins: [
+    ...,
+    new CleanWebpackPlugin(),
+    ...
+  ]
+&#125;
+</code></pre>
+<h3 id="8-3、mini-css-extract-plugin"><a href="#8-3、mini-css-extract-plugin" class="headerlink" title="8 - 3、mini-css-extract-plugin"></a>8 - 3、mini-css-extract-plugin</h3><p>提取 <code>CSS</code> 到一个单独的文件中</p>
+<pre><code class="bash">npm install --save-dev mini-css-extract-plugin
+</code></pre>
+<pre><code class="js">const MiniCssExtractPlugin = require(&#39;mini-css-extract-plugin&#39;);
+module.exports = &#123;
+    ...,
+  module: &#123;
+      rules: [
+          &#123;
+              test: /\.s[ac]ss$/,
+              use: [
+                  &#123;
+                      loader: MiniCssExtractPlugin.loader
+                    &#125;,
+          &#39;css-loader&#39;,
+          &#39;sass-loader&#39;
+        ]
+            &#125;
+      ]
+    &#125;,
+  plugins: [
+    ...,
+    new MiniCssExtractPlugin(&#123;
+        filename: &#39;[name].css&#39;
+    &#125;),
+    ...
+  ]
+&#125;
+</code></pre>
+<h2 id="9、WebpackDevServer"><a href="#9、WebpackDevServer" class="headerlink" title="9、WebpackDevServer"></a>9、WebpackDevServer</h2><p>每次的代码修改都需要重新编译打包，刷新浏览器，特别麻烦，我们可以通过安装 <code>webpackDevServer</code> 来改善这方面的体验</p>
+<pre><code class="bash">npm install --save-dev webpack-dev-server
+</code></pre>
+<p>启动命令：</p>
+<pre><code class="bash">npx webpack-dev-server
+</code></pre>
+<p>或者，<code>package.json</code> 中添加 <code>scripts</code></p>
+<pre><code class="js">...,
+&quot;scripts&quot;: &#123;
+  &quot;server&quot;: &quot;webpack-dev-server&quot;
+&#125;
+</code></pre>
+<p>修改 <code>webpack.config.js</code></p>
+<pre><code class="js">module.exports = &#123;
+  ...,
+  devServer: &#123;
+      // 扩展的虚拟路径
+      contentBase: &quot;./abc&quot;,
+      // 自动开启浏览器
+      open: true,
+      // 端口
+      port: 8081
+    &#125;
+&#125;
+</code></pre>
+<p>启动服务以后，<code>webpack</code> 不在会把打包后的文件生成到硬盘真实目录中了，而是直接存在了内存中(同时虚拟了一个存放目录路径)，后期更新编译打包和访问速度大大提升</p>
+<h3 id="9-1、Proxy"><a href="#9-1、Proxy" class="headerlink" title="9 - 1、Proxy"></a>9 - 1、Proxy</h3><p>当下前端的开发都是前后端分离开发的，前端开发过程中代码会运行在一个服务器环境下(如当前的 <code>WebpackDevServer</code>)，那么在处理一些后端请求的时候通常会出现跨域的问题。<code>WebpackDevServer</code> 内置了一个代理服务，通过内置代理就可以把我们的跨域请求转发目标服务器上(<code>WebpackDevServer</code> 内置的代理发送的请求属于后端 - <code>node</code>，不受同源策略限制)，具体如下：</p>
+<!--后端代码，以 node 为例-->
+
+<pre><code class="js">const Koa = require(&#39;koa&#39;);
+const KoaRouter = require(&#39;koa-router&#39;);
+
+const app = new Koa();
+const router = new KoaRouter();
+
+router.get(&#39;/api/info&#39;, async ctx =&gt; &#123;
+    ctx.body = &#123;
+        username: &#39;zMouse&#39;,
+        gender: &#39;male&#39;
+    &#125;
+&#125;)
+
+app.use( router.routes() );
+app.listen(8787);
+</code></pre>
+<!--前端代码-->
+
+<pre><code class="js">axios(&#123;
+  url: &#39;http://localhost:8787/api/info&#39;
+&#125;).then(res =&gt; &#123;
+  console.log(&#39;res&#39;,res.data);
+&#125;)
+</code></pre>
+<p>默认情况下，该代码运行以后会出现跨域请求错误，修改 <code>webpack</code> 配置</p>
+<pre><code class="js">module.exports = &#123;
+  ...,
+  devServer: &#123;
+      // 生成的虚拟目录路径
+      contentBase: &quot;./dist&quot;,
+      // 自动开启浏览器
+      open: true,
+      // 端口
+      port: 8081,
+      proxy: &#123;
+      &#39;/api&#39;: &#123;
+          target: &#39;http://localhost:8787&#39;
+        &#125;
+    &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>通过 <code>proxy</code> 设置，当我们在当前 <code>WebpackDevServer</code> 环境下发送以 <code>/api</code> 开头的请求都会被转发到 <a target="_blank" rel="noopener" href="http://localhost:8787/">http://localhost:8787</a> 目标服务器下</p>
+<!--修改前端代码-->
+
+<pre><code class="js">axios(&#123;
+  //url: &#39;http://locahost:8081/api/info&#39;,
+  url: &#39;/api/info&#39;
+&#125;).then(res =&gt; &#123;
+  console.log(&#39;res&#39;,res.data);
+&#125;)
+</code></pre>
+<p>注意 <code>url</code> 地址要填写 <code>WebpackDevServer</code> 域，比如当前 <code>WebpackDevServer</code> 开启的是 <a href="http://localhost:8081，也就是我们当前前端代码运行的环境，那么请求的">http://localhost:8081，也就是我们当前前端代码运行的环境，那么请求的</a> <code>url</code> 也必须发送到这里，当我们的请求满足了 <code>proxy</code> 中设置的 <code>/api</code> 开头，那么就会把请求转发到 <code>target</code> ，所以最后的实际请求是：<a target="_blank" rel="noopener" href="http://lcoahost:8787/api/info">http://lcoahost:8787/api/info</a></p>
+<h3 id="9-2、Hot-Module-Replacement"><a href="#9-2、Hot-Module-Replacement" class="headerlink" title="9 - 2、Hot Module Replacement"></a>9 - 2、Hot Module Replacement</h3><p>在之前当代码有变化，我们使用的 <code>live reload</code>，也就是刷新整个页面，虽然这样为我们省掉了很多手动刷新页面的麻烦，但是这样即使只是修改了很小的内容，也会刷新整个页面，无法保持页面操作状态。<code>HMR</code> 随之就出现了，它的核心的局部（模块）更新，也就是不刷新页面，只更新变化的部分</p>
+<pre><code class="js">module.exports = &#123;
+  ...,
+  devServer: &#123;
+      // 生成的虚拟目录路径
+      contentBase: &quot;./dist&quot;,
+      // 自动开启浏览器
+      open: true,
+      // 端口
+      port: 8081,
+      // 开启热更新
+      hot:true,
+      // 即使 HMR 不生效，也不去刷新整个页面(选择开启)
+    hotOnly:true,
+      proxy: &#123;
+      &#39;/api&#39;: &#123;
+          target: &#39;http://localhost:8787&#39;
+        &#125;
+    &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>开启 <code>HMR</code> 以后，当代码发生变化，<code>webpack</code> 即会进行编译，并通过 <code>websocket</code> 通知客户端(浏览器)，我们需要监听处理来自 <code>webpack</code> 的通知，然后通过 <code>HMR</code> 提供的  <code>API</code> 来完成我们的局部更新逻辑</p>
+<!--./fn1.js-->
+
+<pre><code class="js">export default function() &#123;
+    console.log(&#39;start1!&#39;);
+&#125;
+</code></pre>
+<!--index.js-->
+
+<pre><code class="js">import fn1 from &#39;./fn1.js&#39;;
+box1.onclick = fn1;
+
+if (module.hot) &#123;//如果开启 HMR
+    module.hot.accept(&#39;./fn1.js&#39;, function() &#123;
+      // 更新逻辑
+      box1.onclick = fn1;
+    &#125;)
+&#125;
+</code></pre>
+<p>上面代码就是 当 .&#x2F;fn1.js 模块代码发生变化的时候，把最新的 fn1 函数绑定到 box1.onclick 上</p>
+<p>从上面就可以看到，<code>HMR</code> 其实就是以模块为单位，当模块代码发生修改的时候，通知客户端进行对应的更新，而客户端则根据具体的模块来更新我们的页面逻辑(这些逻辑需要自己去实现)，好在当前一些常用的更新逻辑都有了现成的插件</p>
+<p><strong>css热更新</strong></p>
+<p>样式热更新比较简单，<code>style-loader</code> 中就已经集成实现了，我们只需要在 <code>use</code> 中使用就可以了</p>
+<p><strong>react 热更新</strong></p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/gaearon/react-hot-loader">https://github.com/gaearon/react-hot-loader</a></p>
+</li>
+<li><p>react 脚手架中也有集成</p>
+</li>
+</ul>
+<p><strong>vue 热更新</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/vuejs/vue-loader">https://github.com/vuejs/vue-loader</a></li>
+<li>vue 脚手架中也有集成</li>
+</ul>
+<h2 id="10、sourceMap"><a href="#10、sourceMap" class="headerlink" title="10、sourceMap"></a>10、sourceMap</h2><p>我们实际运行在浏览器的代码是通过 <code>webpack</code> 打包合并甚至是压缩混淆过的代码，所生成的代码并不利于我们的调试和错误定位，我们可以通过 <code>sourceMap</code> 来解决这个问题，<code>sourceMap</code> 本质是一个记录了编译后代码与源代码的映射关系的文件，我们可以通过 <code>webpack</code> 的 <code>devtool</code> 选项来开启 <code>sourceMap</code></p>
+<blockquote>
+<h6 id="Tip"><a href="#Tip" class="headerlink" title="Tip"></a>Tip</h6><p>验证 devtool 名称时， 我们期望使用某种模式， 注意不要混淆 devtool 字符串的顺序， 模式是： <code>[inline-|hidden-|eval-][nosources-][cheap-[module-]]source-map</code>.</p>
+</blockquote>
+<pre><code class="js">module.exports = &#123;
+  mode: &#39;production&#39;,
+  devtool: &#39;source-map&#39;,
+  ...
+&#125;
+</code></pre>
+<p>首先，编译后会为每一个编译文件生成一个对应的 <code>.map</code> 文件，同时在编译文件中添加一段对应的 <code>map</code> 文件引入代码</p>
+<pre><code class="js">...
+//# sourceMappingURL=xx.js.map
+</code></pre>
+<pre><code class="css">...
+/*# sourceMappingURL=xx.css.map*/
+</code></pre>
+<p>同时，现代浏览器都能够识别 <code>sourceMap</code> 文件，如 <code>chrome</code>，会在 <code>Sources</code> 面板中显示根据编译文件与对应的 <code>map</code> 文件定位到源文件中，有利于我们的调试和错误定位</p>
+<table>
+<thead>
+<tr>
+<th>eval</th>
+<th><em>不支持IE8</em>  可以设断点调试，不显示列信息，每个js模块代码用eval()执行，并且在生成的每个模块代码尾部加上注释，如WEBPACK FOOTER；module id（模块在数组中的索引） ；sourceURL（原js路径）。不会生成*.map*文件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>source-map</td>
+<td>可以设断点调试，不显示列信息，生成相应的.Map文件，并在合并后的代码尾部加上注释&#x2F;&#x2F;# sourceMappingURL&#x3D;**.js.map</td>
+</tr>
+<tr>
+<td>eval-source-map</td>
+<td>不能设断点调试，不显示列信息，可以用手动加入debugger调试;参考第一种<strong>eval</strong>模式，跟eval不一样的是其用base64存储map信息，不会生成.Map文件，Map信息以Base64格式存放在每个模块代码的尾部</td>
+</tr>
+<tr>
+<td>cheap-source-map</td>
+<td>可以设断点调试，不显示列信息，生成相应的.Map文件，可参考source-map，不包含 loader 的 sourcemap</td>
+</tr>
+<tr>
+<td>cheap-module-source-map</td>
+<td>不包含列信息，同时 loader 的 sourcemap 也被简化为只包含对应行的。最终的 sourcemap 只有一份，它是 webpack 对 loader 生成的 sourcemap 进行简化，然后再次生成的。</td>
+</tr>
+</tbody></table>
+<h2 id="11、Code-Spliting"><a href="#11、Code-Spliting" class="headerlink" title="11、Code Spliting"></a>11、Code Spliting</h2><p>将代码分割到多个不同的bundle(打包后)文件中，可以通过按需加载等方式对资源进行加载，使用合理的情况下可以极大影响加载速度。</p>
+<h3 id="11-1、入口起点"><a href="#11-1、入口起点" class="headerlink" title="11 - 1、入口起点"></a>11 - 1、入口起点</h3><p>通过设置多个入口文件的方式实现最简单的代码分割</p>
+<pre><code class="js">entry: &#123;
+  index: &quot;./src/index.js&quot;,
+  list: &quot;./src/list.js&quot;,
+&#125;,
+output: &#123;
+  path: resolve(__dirname, &quot;../dist&quot;),
+  // 多入口文件的filename不能写死名称，需要通过[name]配置
+  filename: &quot;js/[name].js&quot;,
+&#125;
+</code></pre>
+<h3 id="11-2、防止重复"><a href="#11-2、防止重复" class="headerlink" title="11 - 2、防止重复"></a>11 - 2、防止重复</h3><p>通过设置dependOn配置多个模块之间的共享</p>
+<pre><code class="js">entry: &#123;
+  index: &#123;
+    import: &quot;./src/index.js&quot;,
+    dependOn: &quot;axios&quot;,
+  &#125;,
+  list: &#123;
+      import: &quot;./src/list.js&quot;,
+      dependOn: &quot;axios&quot;,
+  &#125;,
+  axios: &quot;axios&quot;,
+&#125;,
+</code></pre>
+<blockquote>
+<p>When you opt-in to code splitting, Webpack may duplicate modules between chunks depending on <a target="_blank" rel="noopener" href="https://webpack.js.org/plugins/split-chunks-plugin/#defaults">heuristics</a>. If this happens, then you can end up with multiple instances of the same module, each with their own state that can easily get out of sync.</p>
+<p>However, you can set <a target="_blank" rel="noopener" href="https://webpack.js.org/configuration/optimization/#optimizationruntimechunk"><code>optimization.runtimeChunk</code></a> to . This moves Webpack’s runtime module loader into its own bundle rather than being inlined into each entry, creating a global registry that allows code-splitted modules to be shared between entries. This doesn’t prevent Webpack from copying module code between entry points, but it prevents it creating two instances of the same module at runtime, while reducing the number of HTTP requests needed to load modules for a given page.<code>&quot;single&quot;</code></p>
+<p>当你选择使用代码分割时，webpack可能会受<a target="_blank" rel="noopener" href="https://webpack.js.org/plugins/split-chunks-plugin/#defaults">启发式</a>的在多个chunk中复制依赖模块。如果发生了这种事情，这时您有可能得到相同模块的多个实例，他们之间的状态将会很难保证同步。</p>
+<p>当然，您可以通过设置 <a target="_blank" rel="noopener" href="https://webpack.js.org/configuration/optimization/#optimizationruntimechunk"><code>optimization.runtimeChunk</code></a>为<code>“single”</code>进行解决 。这会将Webpack的运行时模块加载程序移到它自己的包中，而不是内联到每个条目中，从而创建一个全局注册表，允许在条目之间共享代码分割的模块。这并不能阻止Webpack在入口点之间复制模块代码，但它可以防止Webpack在运行时创建同一模块的两个实例，同时减少为给定页面加载模块所需的HTTP请求数。</p>
+<p><code>runtimeChunk: &quot;single&quot;</code>是对于确保模块实例化正确所必须的，它默认是禁用状态，这在<a target="_blank" rel="noopener" href="https://webpack.js.org/guides/code-splitting/">Webpack代码分割指南</a>中记载着。</p>
+<p>Although using multiple entry points per page is allowed in webpack, it should be avoided when possible in favor of an entry point with multiple imports: <code>entry: &#123; page: [&#39;./analytics&#39;, &#39;./app&#39;] &#125;</code>. This results in a better optimization and consistent execution order when using <code>async</code> script tags.</p>
+<p>尽管我们可以在webpack中对每个页面配置多入口，但我们应当避免像<code>entry: &#123; page: [&#39;./analytics&#39;, &#39;./app&#39;] &#125;</code>这样的多入口使用多引入的情况。这会让我们在使用<code>async</code>属性的<code>script</code>标签时获得更好的优化以及保证其一致的执行顺序。</p>
+</blockquote>
+<h4 id="11-2-1、SplitChunksPlugin"><a href="#11-2-1、SplitChunksPlugin" class="headerlink" title="11 - 2 - 1、SplitChunksPlugin"></a>11 - 2 - 1、SplitChunksPlugin</h4><p>将公共的依赖模块提取到已有的入口chunk文件或新的chunk文件当中</p>
+<pre><code class="js">entry: &#123;
+  index: &quot;./src/index.js&quot;,
+  list: &quot;./src/list.js&quot;,
+&#125;,
+optimization: &#123;
+  splitChunks: &#123;
+    // async表示只从异步加载得模块（动态加载import()）里面进行拆分
+    // initial表示只从入口模块进行拆分
+    // all表示以上两者都包括
+    chunks: &quot;all&quot;,
+  &#125;,
+&#125;
+</code></pre>
+<pre><code class="js">// 默认配置
+optimization: &#123;
+  splitChunks: &#123;
+    chunks: &#39;async&#39;,
+    minSize: 20000,
+    minRemainingSize: 0,
+    minChunks: 1,
+    maxAsyncRequests: 30,
+    maxInitialRequests: 30,
+    enforceSizeThreshold: 50000,
+    cacheGroups: &#123;
+      defaultVendors: &#123;
+        test: /[\\/]node_modules[\\/]/,
+        priority: -10,
+        reuseExistingChunk: true,
+      &#125;,
+      default: &#123;
+        minChunks: 2,
+        priority: -20,
+        reuseExistingChunk: true,
+      &#125;,
+    &#125;,
+  &#125;,
+&#125;,
+</code></pre>
+<h3 id="11-3、动态导入"><a href="#11-3、动态导入" class="headerlink" title="11 - 3、动态导入"></a>11 - 3、动态导入</h3><p>通过<code>import()</code>动态导入模块，可以通过内联注释对chunk进行一些配置</p>
+<p><a target="_blank" rel="noopener" href="https://webpack.docschina.org/api/module-methods/#magic-comments">模块方法 | webpack 中文文档 (docschina.org)</a></p>
+<pre><code class="js">import(/* webpackChunkName: &#39;data&#39;, webpackPreload: true*/ &#39;./data&#39;)
+    .then(data =&gt; &#123;
+        console.log(data);
+    &#125;)
+</code></pre>
+<h2 id="12、预加载-x2F-预获取"><a href="#12、预加载-x2F-预获取" class="headerlink" title="12、预加载&#x2F;预获取"></a>12、预加载&#x2F;预获取</h2><p>通过内联注释<code>webpackPrefetch</code>和<code>webpackPreload</code>两种资源提示告知浏览器对资源进行不同的加载处理</p>
+<pre><code class="js">const data = import(/* webpackChunkName: &#39;data&#39;, webpackPreload: true */ &#39;./data.js&#39;)
+const data = import(/* webpackChunkName: &#39;data&#39;, webpackPrefetch: true */ &#39;./data.js&#39;)
+</code></pre>
+<blockquote>
+<p>与 prefetch 指令相比，preload 指令有许多不同之处：</p>
+<ul>
+<li>preload chunk 会在父 chunk 加载时，以并行方式开始加载。prefetch chunk 会在父 chunk 加载结束后开始加载。</li>
+<li>preload chunk 具有中等优先级，并立即下载。prefetch chunk 在浏览器闲置时下载。</li>
+<li>preload chunk 会在父 chunk 中立即请求，用于当下时刻。prefetch chunk 会用于未来的某个时刻。</li>
+<li>浏览器支持程度不同。</li>
+</ul>
+</blockquote>
+<h2 id="13、外部扩展"><a href="#13、外部扩展" class="headerlink" title="13、外部扩展"></a>13、外部扩展</h2><p>通过externals配置在输出的bundle中排除某些依赖，这些依赖将会在用户环境中所包含。</p>
+<pre><code class="js">externals: 
+  lodash: &#39;_&#39;
+&#125;,
+</code></pre>
+<h2 id="14、tree-shaking"><a href="#14、tree-shaking" class="headerlink" title="14、tree shaking"></a>14、tree shaking</h2><p>将上下文中的dead-code移除，就像摇树上的枯叶使其掉落一样</p>
+<pre><code class="js">optimization: &#123;
+  usedExports: true,
+&#125;
+</code></pre>
+
+        </article>
+
+        
+            
+  <div class="nexmoe-post-copyright">
+    <strong>本文作者：</strong>diangen<br>
+    
+    <strong>本文链接：</strong><a href="http://example.com/post/b9f20a20.html" title="http:&#x2F;&#x2F;example.com&#x2F;post&#x2F;b9f20a20.html" target="_blank" rel="noopener">http:&#x2F;&#x2F;example.com&#x2F;post&#x2F;b9f20a20.html</a><br>
+
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+        
+
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/webpack/">webpack</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/webpack/" rel="tag">webpack</a>
+    
+</div>
+
+    <div class="nexmoe-post-footer">
+        <section class="nexmoe-comment">
+    <div class="valine"></div>
+<script src='https://lib.baomitu.com/valine/1.3.9/Valine.min.js'></script>
+<script>
+    // 使用方法 https://valine.js.org/quickstart.html
+    new Valine({
+        el: '.valine',
+        appId: 'A65v0zKrVxWX78TbGDhHUczD-gzGzoHsz',
+        appKey: 'D81sqZe7bgPM30XXKO98nli0'
+    })
+</script>
+</section>
+    </div>
+</div>
+
+
+        <div class="nexmoe-post-right">
+          
+            <div class="nexmoe-fixed">
+              <div class="nexmoe-tool">
+                <a href="#" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+              </div>
+            </div>
+          
+        </div>
+    </div>
+  </div>
+  <div id="nexmoe-pendant">
+    <div class="nexmoe-drawer mdui-drawer nexmoe-pd" id="drawer">
+        
+            <div class="nexmoe-pd-item">
+                <div class="clock">
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="needle" id="hours"></div>
+        <div class="needle" id="minutes"></div>
+        <div class="needle" id="seconds"></div>
+        <div class="clock_logo">
+
+        </div>
+
+    </div>
+<style>
+    .clock {
+        background-color: #ffffff;
+        width: 70vw;
+        height: 70vw;
+        max-width: 70vh;
+        max-height: 70vh;
+        border: solid 2.8vw #242424;
+        position: relative;
+        overflow: hidden;
+        border-radius: 50%;
+        box-sizing: border-box;
+        box-shadow: 0 1.4vw 2.8vw rgba(0, 0, 0, 0.8);
+        zoom:0.2
+    }
+
+    .memory {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-origin: center;
+    }
+
+    .memory:nth-child(1) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(0deg) translateY(-520%);
+    }
+
+    .memory:nth-child(2) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(6deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(3) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(12deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(4) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(18deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(5) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(24deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(6) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(30deg) translateY(-520%);
+    }
+
+    .memory:nth-child(7) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(36deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(8) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(42deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(9) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(48deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(10) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(54deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(11) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(60deg) translateY(-520%);
+    }
+
+    .memory:nth-child(12) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(66deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(13) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(72deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(14) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(78deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(15) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(84deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(16) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(90deg) translateY(-520%);
+    }
+
+    .memory:nth-child(17) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(96deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(18) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(102deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(19) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(108deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(20) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(114deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(21) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(120deg) translateY(-520%);
+    }
+
+    .memory:nth-child(22) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(126deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(23) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(132deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(24) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(138deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(25) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(144deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(26) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(150deg) translateY(-520%);
+    }
+
+    .memory:nth-child(27) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(156deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(28) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(162deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(29) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(168deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(30) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(174deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(31) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(180deg) translateY(-520%);
+    }
+
+    .memory:nth-child(32) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(186deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(33) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(192deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(34) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(198deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(35) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(204deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(36) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(210deg) translateY(-520%);
+    }
+
+    .memory:nth-child(37) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(216deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(38) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(222deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(39) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(228deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(40) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(234deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(41) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(240deg) translateY(-520%);
+    }
+
+    .memory:nth-child(42) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(246deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(43) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(252deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(44) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(258deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(45) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(264deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(46) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(270deg) translateY(-520%);
+    }
+
+    .memory:nth-child(47) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(276deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(48) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(282deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(49) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(288deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(50) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(294deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(51) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(300deg) translateY(-520%);
+    }
+
+    .memory:nth-child(52) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(306deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(53) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(312deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(54) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(318deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(55) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(324deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(56) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(330deg) translateY(-520%);
+    }
+
+    .memory:nth-child(57) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(336deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(58) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(342deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(59) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(348deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(60) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(354deg) translateY(-1461%);
+    }
+
+    .needle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-origin: center;
+    }
+
+    .needle#hours {
+        background-color: #1f1f1f;
+        width: 4%;
+        height: 30%;
+        transform-origin: center 75%;
+        transform: translate(-50%, -75%);
+    }
+
+    .needle#hours.moving {
+        transition: transform 150ms ease-out;
+    }
+
+    .needle#hours:after {
+        content: '';
+        background-color: #1f1f1f;
+        width: 4vw;
+        height: 4vw;
+        max-width: 4vh;
+        max-height: 4vh;
+        display: block;
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .needle#minutes {
+        background-color: #1f1f1f;
+        width: 2%;
+        height: 45%;
+        transform-origin: center 75%;
+        transform: translate(-50%, -75%);
+    }
+
+    .needle#minutes.moving {
+        transition: transform 150ms ease-out;
+    }
+
+    .needle#minutes:after {
+        content: '';
+        background-color: #1f1f1f;
+        width: 4vw;
+        height: 4vw;
+        max-width: 4vh;
+        max-height: 4vh;
+        display: block;
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .needle#seconds {
+        background-color: #cb2f2f;
+        width: 1%;
+        height: 50%;
+        transform-origin: center 75%;
+        transform: translate(-50%, -75%);
+    }
+
+    .needle#seconds.moving {
+        transition: transform 150ms ease-out;
+    }
+
+    .needle#seconds:after {
+        content: '';
+        background-color: #cb2f2f;
+        width: 2.5vw;
+        height: 2.5vw;
+        max-width: 2.5vh;
+        max-height: 2.5vh;
+        display: block;
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .clock_logo{
+        width: 10vw;
+        height: 10vw;
+        max-width: 10vh;
+        max-height: 10vh;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+    @media (min-width: 100vh) {
+        .clock {
+            border: solid 2.8vh #242424;
+            box-shadow: 0 1.4vh 2.8vh rgba(0, 0, 0, 0.8);
+        }
+    }
+
+</style>
+
+
+
+
+
+            </div>
+        
+            <div class="nexmoe-pd-item">
+                <div class="qweather" >
+    <div id="he-plugin-standard"></div>
+    <div class="qweather-logo">
+
+    </div>
+
+</div>
+<style>
+    .qweather{
+        position: relative;
+    }
+    .qweather-logo{
+        position: absolute;
+        right: 0;
+        top: -15px;
+        width: 40px;
+        height: 40px;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+</style>
+<script>
+  WIDGET = {
+    "CONFIG": {
+      "layout": "2",
+      "width": "260",
+      "height": "220",
+      "background": "5",
+      "dataColor": "e67249",
+      "borderRadius": "15",
+      "key": "931be7f8bb5d4e339dd4c3f680f10744"
+    }
+  }
+</script>
+<script src="https://widget.qweather.net/standard/static/js/he-standard-common.js?v=2.0"></script>
+
+            </div>
+        
+</div>
+<style>
+    .nexmoe-pd {
+        left: auto;
+        top: 40px;
+        right: 0;
+    }
+    .nexmoe-pd-item{
+       display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+</style>
+
+  </div>
+  <script src="https://lib.baomitu.com/lazysizes/5.1.0/lazysizes.min.js"></script>
+<script src="https://lib.baomitu.com/highlight.js/10.0.0/highlight.min.js"></script>
+<script src="https://lib.baomitu.com/mdui/0.4.3/js/mdui.min.js"></script>
+
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+
+<script src="https://lib.baomitu.com/jquery/3.5.1/jquery.slim.min.js"></script>
+<script src="/lib/fancybox/js/jquery.fancybox.min.js"></script>
+
+
+<script src="/js/app.js?v=1671030751572"></script>
+
+<script src="https://lib.baomitu.com/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+  
+
+
+
+
+
+<!-- hexo injector body_end start -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<script src="/js/search.js"></script>
+
+<script src="/js/clock.js"></script>
+
+<script src="https://lib.baomitu.com/clipboard.js/2.0.8/clipboard.min.js"></script>
+
+<script src="/lib/codeBlock/codeBlockFuction.js"></script>
+
+<script src="/lib/codeBlock/codeLang.js"></script>
+
+<script src="/lib/codeBlock/codeCopy.js"></script>
+
+<script src="/lib/codeBlock/codeShrink.js"></script>
+
+<link rel="stylesheet" href="/lib/codeBlock/matery.css">
+
+<script src="/js/webapp.js"></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+<script>(function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/051b1e60.js","daovoice")</script>
+<script>
+  daovoice('init', {
+    app_id: "051b1e60"
+  });
+  daovoice('update');
+</script>
+

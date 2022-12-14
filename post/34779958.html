@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+  
+  <meta name="baidu-site-verification" content="code-J1Qg17G6wT" />
+  <title>vue3+ts+webpack项目搭建 - 就像风住了风</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="就像风住了风个人博客">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+    <!-- Site Verification -->
+    <meta name="baidu-site-verification" content="code-jK4ueJU3s4" />
+
+  <link rel="shortcut icon" href="/images/head/head.jpg" type="image/png" />
+  <meta name="description" content="使用VUE3开发很久了，但一直没进行总结和记录，忙里偷闲整理搭建一套VUE3项目脚手架，正好记录一下，按照我的教程让你开启vue3之旅吧！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3+ts+webpack项目搭建">
+<meta property="og:url" content="http://example.com/post/34779958.html">
+<meta property="og:site_name" content="就像风住了风">
+<meta property="og:description" content="使用VUE3开发很久了，但一直没进行总结和记录，忙里偷闲整理搭建一套VUE3项目脚手架，正好记录一下，按照我的教程让你开启vue3之旅吧！">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsq2gh989yj30pj05ggmb.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsq2acx21rj30ow057mxp.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsq2oq26odj30pw05faaq.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsqq0o5jxmj30bb04qwen.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsqq16zo75j307703mt8m.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsqq26phpxj30dj06fgm3.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsqq3hn229j30nf04z74q.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsqw17gaqjj30to0cj3zp.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsqvz2odi4j30ek00zmx2.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsqvzftay5j30iu04k74d.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsqw8ca15oj30r600wmx4.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsqw8mq3zlj60ni01hmx402.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsqw8y05bjj30kt01fjrb.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsqw9z5vbij30bm00q744.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsqwar8xp1j30fq00ya9x.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsqwc4gtkxj30e207174t.jpg">
+<meta property="article:published_time" content="2021-11-05T13:20:19.000Z">
+<meta property="article:modified_time" content="2022-12-14T14:59:44.260Z">
+<meta property="article:author" content="diangen">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gsq2gh989yj30pj05ggmb.jpg">
+  <link rel="stylesheet" href="https://lib.baomitu.com/highlight.js/9.15.8/styles/atom-one-dark.min.css" crossorigin>
+  <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css">
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+  <link rel="stylesheet" href="/lib/fancybox/css/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://lib.baomitu.com/justifiedGallery/3.8.1/css/justifiedGallery.min.css">
+  
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_2421060_8z08qcz5sq3.css">
+  
+  <link rel="stylesheet" href="/css/style.css?v=1671030751574">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(/images/background/xiaomai.jpg)"></div>
+    <div class="nexmoe-small" style="background-image: url(/images/background/lihui.png)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="diangen" class="mdui-btn mdui-btn-icon"><img src="/images/head/head.jpg" alt="diangen"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="diangen">
+            <img src="/images/head/head.jpg" alt="diangen" alt="diangen">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div class="nexmoe-count-item"><span>文章</span>4 <div class="item-radius"></div><div class="item-radius item-right"></div> </div>
+        <div class="nexmoe-count-item"><span>标签</span>3<div class="item-radius"></div><div class="item-radius item-right"></div></div>
+        <div class="nexmoe-count-item"><span>分类</span>2<div class="item-radius"></div><div class="item-radius item-right"></div></div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-meishi"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archives.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-hanbao1"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于我的">
+            <i class="mdui-list-item-icon nexmoefont icon-jiubei1"></i>
+            <div class="mdui-list-item-content">
+                关于我的
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/friend.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-cola"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/download.html" title="下载中心">
+            <i class="mdui-list-item-icon nexmoefont icon-tangguo"></i>
+            <div class="mdui-list-item-content">
+                下载中心
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  
+<!-- 站内搜索 -->
+
+<div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search" >
+        <form id="search-form">
+            <label><input type="text" id="local-search-input" name="q" results="0" placeholder="站内搜索" class="input form-control" autocomplete="off" autocorrect="off"/></label>
+            <!-- 清空/重置搜索框 -->
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+        </form>
+    </div>
+    <div id="local-search-result"></div> <!-- 搜索结果区 -->
+    <!-- <p class='no-result'></p> 无匹配时显示，注意在 CSS 中设置默认隐藏 -->
+</div>
+
+
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="/1113969983@qq.com" target="_blank" mdui-tooltip="{content: 'mail'}" style="color: rgb(249,8,8);background-color: rgba(249,8,8,.1);">
+            <i class="nexmoefont icon-mail-fill"></i>
+        </a><a class="mdui-ripple" href="https://blog.csdn.net/qq_41961239?type=blog" target="_blank" mdui-tooltip="{content: 'CSDN'}" style="color: rgb(199,29,35);background-color: rgba(199,29,35,.1);">
+            <i class="nexmoefont icon-csdn"></i>
+        </a><a class="mdui-ripple" href="https://github.com/explore" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a><a class="mdui-ripple" href="https://gitee.com/chao-diangen/projects" target="_blank" mdui-tooltip="{content: 'gitee'}" style="color: rgb(255, 255, 255);background-color: rgb(199,29,35);">
+            <i class="nexmoefont icon-mayun"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/webpack/">webpack</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/前端/">前端</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/vue/" style="font-size: 20px;">vue</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
+    </div>
+    
+  </div>
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+<style>
+.nexmoe-widget .archive-list-count{
+	position : absolute;
+	right: 15px;
+	top:9px;
+	color: #DDD;
+}
+</style>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 diangen
+        <br/>
+        <br/>
+        
+        <div style="font-size: 12px">
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            本站总访问量  <a id="busuanzi_value_site_pv"></a> 次<br />
+            本站访客数<a id="busuanzi_value_site_uv"></a>人次
+        </div>
+        
+        
+    </div>
+
+</div><!-- .nexmoe-drawer -->
+
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+    
+        <div class="nexmoe-post-cover" style="padding-bottom: 26.666666666666668%;">
+            <img data-src="https://www.vuemastery.com/images/courses/studyroom-standard.png" data-sizes="auto" alt="vue3+ts+webpack项目搭建" class="lazyload">
+            <h1>vue3+ts+webpack项目搭建</h1>
+        </div>
+    
+
+        <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2021年11月05日</a>
+    <a><i class="nexmoefont icon-areachart"></i>3.2k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 16 分钟</a>
+</div>
+
+        <div class="nexmoe-post-right">
+            
+                <div class="nexmoe-fixed">
+                    <div class="nexmoe-valign">
+                        <div class="nexmoe-toc">
+                            
+                            
+                                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA%E8%A7%84%E8%8C%83"><span class="toc-number">1.</span> <span class="toc-text">项目搭建规范</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83"><span class="toc-number">1.1.</span> <span class="toc-text">一. 代码规范</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E9%9B%86%E6%88%90editorconfig%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1. 集成editorconfig配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E4%BD%BF%E7%94%A8prettier%E5%B7%A5%E5%85%B7"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2. 使用prettier工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E4%BD%BF%E7%94%A8ESLint%E6%A3%80%E6%B5%8B"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.3. 使用ESLint检测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-git-Husky%E5%92%8Ceslint"><span class="toc-number">1.1.4.</span> <span class="toc-text">1.4. git Husky和eslint</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-git-commit%E8%A7%84%E8%8C%83"><span class="toc-number">1.1.5.</span> <span class="toc-text">1.5. git commit规范</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-1-%E4%BB%A3%E7%A0%81%E6%8F%90%E4%BA%A4%E9%A3%8E%E6%A0%BC"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">1.5.1. 代码提交风格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-5-2-%E4%BB%A3%E7%A0%81%E6%8F%90%E4%BA%A4%E9%AA%8C%E8%AF%81"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">1.5.2. 代码提交验证</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E9%9B%86%E6%88%90"><span class="toc-number">1.2.</span> <span class="toc-text">二. 第三方库集成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-vue-config-js%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1. vue.config.js配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-vue-router%E9%9B%86%E6%88%90"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2. vue-router集成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-vuex%E9%9B%86%E6%88%90"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.3. vuex集成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-element-plus%E9%9B%86%E6%88%90"><span class="toc-number">1.2.4.</span> <span class="toc-text">2.4. element-plus集成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-1-%E5%85%A8%E5%B1%80%E5%BC%95%E5%85%A5"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">2.4.1. 全局引入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-2-%E5%B1%80%E9%83%A8%E5%BC%95%E5%85%A5"><span class="toc-number">1.2.4.2.</span> <span class="toc-text">2.4.2. 局部引入</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-axios%E9%9B%86%E6%88%90"><span class="toc-number">1.2.5.</span> <span class="toc-text">2.5. axios集成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-VSCode%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.6.</span> <span class="toc-text">2.6. VSCode配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89-%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3"><span class="toc-number">1.3.</span> <span class="toc-text">三. 接口文档</span></a></li></ol></li></ol>
+                            
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+
+        <article>
+            <p>使用VUE3开发很久了，但一直没进行总结和记录，忙里偷闲整理搭建一套VUE3项目脚手架，正好记录一下，按照我的教程让你开启vue3之旅吧！</p>
+<span id="more"></span>
+
+
+<h1 id="项目搭建规范"><a href="#项目搭建规范" class="headerlink" title="项目搭建规范"></a>项目搭建规范</h1><h2 id="一-代码规范"><a href="#一-代码规范" class="headerlink" title="一. 代码规范"></a>一. 代码规范</h2><h3 id="1-1-集成editorconfig配置"><a href="#1-1-集成editorconfig配置" class="headerlink" title="1.1. 集成editorconfig配置"></a>1.1. 集成editorconfig配置</h3><p>EditorConfig 有助于为不同 IDE 编辑器上处理同一项目的多个开发人员维护一致的编码风格。</p>
+<pre><code class="yaml"># http://editorconfig.org
+
+root = true
+
+[*] # 表示所有文件适用
+charset = utf-8 # 设置文件字符集为 utf-8
+indent_style = space # 缩进风格（tab | space）
+indent_size = 2 # 缩进大小
+end_of_line = lf # 控制换行类型(lf | cr | crlf)
+trim_trailing_whitespace = true # 去除行首的任意空白字符
+insert_final_newline = true # 始终在文件末尾插入一个新行
+
+[*.md] # 表示仅 md 文件适用以下规则
+max_line_length = off
+trim_trailing_whitespace = false
+</code></pre>
+<p>VSCode需要安装一个插件：EditorConfig for VS Code</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://tva1.sinaimg.cn/large/008i3skNgy1gsq2gh989yj30pj05ggmb.jpg" alt="image-20210722215138665" class="lazyload"></p>
+<h3 id="1-2-使用prettier工具"><a href="#1-2-使用prettier工具" class="headerlink" title="1.2. 使用prettier工具"></a>1.2. 使用prettier工具</h3><p>Prettier 是一款强大的代码格式化工具，支持 JavaScript、TypeScript、CSS、SCSS、Less、JSX、Angular、Vue、GraphQL、JSON、Markdown 等语言，基本上前端能用到的文件格式它都可以搞定，是当下最流行的代码格式化工具。</p>
+<p>1.安装prettier</p>
+<pre><code class="shell">npm install prettier -D
+</code></pre>
+<p>2.配置.prettierrc文件：</p>
+<ul>
+<li>useTabs：使用tab缩进还是空格缩进，选择false；</li>
+<li>tabWidth：tab是空格的情况下，是几个空格，选择2个；</li>
+<li>printWidth：当行字符的长度，推荐80，也有人喜欢100或者120；</li>
+<li>singleQuote：使用单引号还是双引号，选择true，使用单引号；</li>
+<li>trailingComma：在多行输入的尾逗号是否添加，设置为 <code>none</code>；</li>
+<li>semi：语句末尾是否要加分号，默认值true，选择false表示不加；</li>
+</ul>
+<pre><code class="json">&#123;
+  &quot;useTabs&quot;: false,
+  &quot;tabWidth&quot;: 2,
+  &quot;printWidth&quot;: 80,
+  &quot;singleQuote&quot;: true,
+  &quot;trailingComma&quot;: &quot;none&quot;,
+  &quot;semi&quot;: false
+&#125;
+</code></pre>
+<p>3.创建.prettierignore忽略文件</p>
+<pre><code>/dist/*
+.local
+.output.js
+/node_modules/**
+
+**/*.svg
+**/*.sh
+
+/public/*
+</code></pre>
+<p>4.VSCode需要安装prettier的插件</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://tva1.sinaimg.cn/large/008i3skNgy1gsq2acx21rj30ow057mxp.jpg" alt="image-20210722214543454" class="lazyload"></p>
+<p>5.测试prettier是否生效</p>
+<ul>
+<li>测试一：在代码中保存代码；</li>
+<li>测试二：配置一次性修改的命令；</li>
+</ul>
+<p>在package.json中配置一个scripts：</p>
+<pre><code class="json">    &quot;prettier&quot;: &quot;prettier --write .&quot;
+</code></pre>
+<h3 id="1-3-使用ESLint检测"><a href="#1-3-使用ESLint检测" class="headerlink" title="1.3. 使用ESLint检测"></a>1.3. 使用ESLint检测</h3><p>1.在前面创建项目的时候，我们就选择了ESLint，所以Vue会默认帮助我们配置需要的ESLint环境。</p>
+<p>2.VSCode需要安装ESLint插件：</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://tva1.sinaimg.cn/large/008i3skNgy1gsq2oq26odj30pw05faaq.jpg" alt="image-20210722215933360" class="lazyload"></p>
+<p>3.解决eslint和prettier冲突的问题：</p>
+<p>安装插件：（vue在创建项目时，如果选择prettier，那么这两个插件会自动安装）</p>
+<pre><code class="shell">npm i eslint-plugin-prettier eslint-config-prettier -D
+</code></pre>
+<p>添加prettier插件：</p>
+<pre><code class="json">  extends: [
+    &quot;plugin:vue/vue3-essential&quot;,
+    &quot;eslint:recommended&quot;,
+    &quot;@vue/typescript/recommended&quot;,
+    &quot;@vue/prettier&quot;,
+    &quot;@vue/prettier/@typescript-eslint&quot;,
+    &#39;plugin:prettier/recommended&#39;
+  ],
+</code></pre>
+<h3 id="1-4-git-Husky和eslint"><a href="#1-4-git-Husky和eslint" class="headerlink" title="1.4. git Husky和eslint"></a>1.4. git Husky和eslint</h3><p>虽然我们已经要求项目使用eslint了，但是不能保证组员提交代码之前都将eslint中的问题解决掉了：</p>
+<ul>
+<li><p>也就是我们希望保证代码仓库中的代码都是符合eslint规范的；</p>
+</li>
+<li><p>那么我们需要在组员执行 <code>git commit </code> 命令的时候对其进行校验，如果不符合eslint规范，那么自动通过规范进行修复；</p>
+</li>
+</ul>
+<p>那么如何做到这一点呢？可以通过Husky工具：</p>
+<ul>
+<li>husky是一个git hook工具，可以帮助我们触发git提交的各个阶段：pre-commit、commit-msg、pre-push</li>
+</ul>
+<p>如何使用husky呢？</p>
+<p>这里我们可以使用自动配置命令：</p>
+<pre><code class="shell">npx husky-init &amp;&amp; npm install
+</code></pre>
+<p>这里会做三件事：</p>
+<p>1.安装husky相关的依赖：</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://tva1.sinaimg.cn/large/008i3skNgy1gsqq0o5jxmj30bb04qwen.jpg" alt="image-20210723112648927" class="lazyload"></p>
+<p>2.在项目目录下创建 <code>.husky</code> 文件夹：</p>
+<pre><code>npx huksy install
+</code></pre>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://tva1.sinaimg.cn/large/008i3skNgy1gsqq16zo75j307703mt8m.jpg" alt="image-20210723112719634" class="lazyload"></p>
+<p>3.在package.json中添加一个脚本：</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://tva1.sinaimg.cn/large/008i3skNgy1gsqq26phpxj30dj06fgm3.jpg" alt="image-20210723112817691" class="lazyload"></p>
+<p>接下来，我们需要去完成一个操作：在进行commit时，执行lint脚本：</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://tva1.sinaimg.cn/large/008i3skNgy1gsqq3hn229j30nf04z74q.jpg" alt="image-20210723112932943" class="lazyload"></p>
+<p>这个时候我们执行git commit的时候会自动对代码进行lint校验。</p>
+<h3 id="1-5-git-commit规范"><a href="#1-5-git-commit规范" class="headerlink" title="1.5. git commit规范"></a>1.5. git commit规范</h3><h4 id="1-5-1-代码提交风格"><a href="#1-5-1-代码提交风格" class="headerlink" title="1.5.1. 代码提交风格"></a>1.5.1. 代码提交风格</h4><p>通常我们的git commit会按照统一的风格来提交，这样可以快速定位每次提交的内容，方便之后对版本进行控制。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gsqw17gaqjj30to0cj3zp.jpg"></p>
+<p>但是如果每次手动来编写这些是比较麻烦的事情，我们可以使用一个工具：Commitizen</p>
+<ul>
+<li>Commitizen 是一个帮助我们编写规范 commit message 的工具；</li>
+</ul>
+<p>1.安装Commitizen</p>
+<pre><code class="shell">npm install commitizen -D
+</code></pre>
+<p>2.安装cz-conventional-changelog，并且初始化cz-conventional-changelog：</p>
+<pre><code class="shell">npx commitizen init cz-conventional-changelog --save-dev --save-exact
+</code></pre>
+<p>这个命令会帮助我们安装cz-conventional-changelog：</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://tva1.sinaimg.cn/large/008i3skNgy1gsqvz2odi4j30ek00zmx2.jpg" alt="image-20210723145249096" class="lazyload"></p>
+<p>并且在package.json中进行配置：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gsqvzftay5j30iu04k74d.jpg"></p>
+<p>这个时候我们提交代码需要使用 <code>npx cz</code>：</p>
+<ul>
+<li>第一步是选择type，本次更新的类型</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>feat</td>
+<td>新增特性 (feature)</td>
+</tr>
+<tr>
+<td>fix</td>
+<td>修复 Bug(bug fix)</td>
+</tr>
+<tr>
+<td>docs</td>
+<td>修改文档 (documentation)</td>
+</tr>
+<tr>
+<td>style</td>
+<td>代码格式修改(white-space, formatting, missing semi colons, etc)</td>
+</tr>
+<tr>
+<td>refactor</td>
+<td>代码重构(refactor)</td>
+</tr>
+<tr>
+<td>perf</td>
+<td>改善性能(A code change that improves performance)</td>
+</tr>
+<tr>
+<td>test</td>
+<td>测试(when adding missing tests)</td>
+</tr>
+<tr>
+<td>build</td>
+<td>变更项目构建或外部依赖（例如 scopes: webpack、gulp、npm 等）</td>
+</tr>
+<tr>
+<td>ci</td>
+<td>更改持续集成软件的配置文件和 package 中的 scripts 命令，例如 scopes: Travis, Circle 等</td>
+</tr>
+<tr>
+<td>chore</td>
+<td>变更构建流程或辅助工具(比如更改测试环境)</td>
+</tr>
+<tr>
+<td>revert</td>
+<td>代码回退</td>
+</tr>
+</tbody></table>
+<ul>
+<li>第二步选择本次修改的范围（作用域）</li>
+</ul>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://tva1.sinaimg.cn/large/008i3skNgy1gsqw8ca15oj30r600wmx4.jpg" alt="image-20210723150147510" class="lazyload"></p>
+<ul>
+<li>第三步选择提交的信息</li>
+</ul>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://tva1.sinaimg.cn/large/008i3skNgy1gsqw8mq3zlj60ni01hmx402.jpg" alt="image-20210723150204780" class="lazyload"></p>
+<ul>
+<li>第四步提交详细的描述信息</li>
+</ul>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://tva1.sinaimg.cn/large/008i3skNgy1gsqw8y05bjj30kt01fjrb.jpg" alt="image-20210723150223287" class="lazyload"></p>
+<ul>
+<li>第五步是否是一次重大的更改</li>
+</ul>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://tva1.sinaimg.cn/large/008i3skNgy1gsqw9z5vbij30bm00q744.jpg" alt="image-20210723150322122" class="lazyload"></p>
+<ul>
+<li>第六步是否影响某个open issue</li>
+</ul>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://tva1.sinaimg.cn/large/008i3skNgy1gsqwar8xp1j30fq00ya9x.jpg" alt="image-20210723150407822" class="lazyload"></p>
+<p>我们也可以在scripts中构建一个命令来执行 cz：</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://tva1.sinaimg.cn/large/008i3skNgy1gsqwc4gtkxj30e207174t.jpg" alt="image-20210723150526211" class="lazyload"></p>
+<h4 id="1-5-2-代码提交验证"><a href="#1-5-2-代码提交验证" class="headerlink" title="1.5.2. 代码提交验证"></a>1.5.2. 代码提交验证</h4><p>如果我们按照cz来规范了提交风格，但是依然有同事通过 <code>git commit</code> 按照不规范的格式提交应该怎么办呢？</p>
+<ul>
+<li>我们可以通过commitlint来限制提交；</li>
+</ul>
+<p>1.安装 @commitlint&#x2F;config-conventional 和 @commitlint&#x2F;cli</p>
+<pre><code class="shell">npm i @commitlint/config-conventional @commitlint/cli -D
+</code></pre>
+<p>2.在根目录创建commitlint.config.js文件，配置commitlint</p>
+<pre><code class="js">module.exports = &#123;
+  extends: [&#39;@commitlint/config-conventional&#39;]
+&#125;
+</code></pre>
+<p>3.使用husky生成commit-msg文件，验证提交信息：</p>
+<pre><code class="shell">npx husky add .husky/commit-msg &quot;npx --no-install commitlint --edit $1&quot;
+</code></pre>
+<h2 id="二-第三方库集成"><a href="#二-第三方库集成" class="headerlink" title="二. 第三方库集成"></a>二. 第三方库集成</h2><h3 id="2-1-vue-config-js配置"><a href="#2-1-vue-config-js配置" class="headerlink" title="2.1. vue.config.js配置"></a>2.1. vue.config.js配置</h3><p>vue.config.js有三种配置方式：</p>
+<ul>
+<li>方式一：直接通过CLI提供给我们的选项来配置：<ul>
+<li>比如publicPath：配置应用程序部署的子目录（默认是 <code>/</code>，相当于部署在 <code>https://www.my-app.com/</code>）；</li>
+<li>比如outputDir：修改输出的文件夹；</li>
+</ul>
+</li>
+<li>方式二：通过configureWebpack修改webpack的配置：<ul>
+<li>可以是一个对象，直接会被合并；</li>
+<li>可以是一个函数，会接收一个config，可以通过config来修改配置；</li>
+</ul>
+</li>
+<li>方式三：通过chainWebpack修改webpack的配置：<ul>
+<li>是一个函数，会接收一个基于  <a target="_blank" rel="noopener" href="https://github.com/mozilla-neutrino/webpack-chain">webpack-chain</a> 的config对象，可以对配置进行修改；</li>
+</ul>
+</li>
+</ul>
+<pre><code class="js">const path = require(&#39;path&#39;)
+
+module.exports = &#123;
+  outputDir: &#39;./build&#39;,
+  // configureWebpack: &#123;
+  //   resolve: &#123;
+  //     alias: &#123;
+  //       views: &#39;@/views&#39;
+  //     &#125;
+  //   &#125;
+  // &#125;
+  // configureWebpack: (config) =&gt; &#123;
+  //   config.resolve.alias = &#123;
+  //     &#39;@&#39;: path.resolve(__dirname, &#39;src&#39;),
+  //     views: &#39;@/views&#39;
+  //   &#125;
+  // &#125;,
+  chainWebpack: (config) =&gt; &#123;
+    config.resolve.alias.set(&#39;@&#39;, path.resolve(__dirname, &#39;src&#39;)).set(&#39;views&#39;, &#39;@/views&#39;)
+  &#125;
+&#125;
+</code></pre>
+<h3 id="2-2-vue-router集成"><a href="#2-2-vue-router集成" class="headerlink" title="2.2. vue-router集成"></a>2.2. vue-router集成</h3><p>安装vue-router的最新版本：</p>
+<pre><code class="shell">npm install vue-router@next
+</code></pre>
+<p>创建router对象：</p>
+<pre><code class="ts">import &#123; createRouter, createWebHashHistory &#125; from &#39;vue-router&#39;
+import &#123; RouteRecordRaw &#125; from &#39;vue-router&#39;
+
+const routes: RouteRecordRaw[] = [
+  &#123;
+    path: &#39;/&#39;,
+    redirect: &#39;/main&#39;
+  &#125;,
+  &#123;
+    path: &#39;/main&#39;,
+    component: () =&gt; import(&#39;../views/main/main.vue&#39;)
+  &#125;,
+  &#123;
+    path: &#39;/login&#39;,
+    component: () =&gt; import(&#39;../views/login/login.vue&#39;)
+  &#125;
+]
+
+const router = createRouter(&#123;
+  routes,
+  history: createWebHashHistory()
+&#125;)
+
+export default router
+</code></pre>
+<p>安装router：</p>
+<pre><code class="ts">import router from &#39;./router&#39;
+
+createApp(App).use(router).mount(&#39;#app&#39;)
+</code></pre>
+<p>在App.vue中配置跳转：</p>
+<pre><code class="html">&lt;template&gt;
+  &lt;div id=&quot;app&quot;&gt;
+    &lt;router-link to=&quot;/login&quot;&gt;登录&lt;/router-link&gt;
+    &lt;router-link to=&quot;/main&quot;&gt;首页&lt;/router-link&gt;
+    &lt;router-view&gt;&lt;/router-view&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+</code></pre>
+<h3 id="2-3-vuex集成"><a href="#2-3-vuex集成" class="headerlink" title="2.3. vuex集成"></a>2.3. vuex集成</h3><p>安装vuex：</p>
+<pre><code class="shell">npm install vuex@next
+</code></pre>
+<p>创建store对象：</p>
+<pre><code class="ts">import &#123; createStore &#125; from &#39;vuex&#39;
+
+const store = createStore(&#123;
+  state() &#123;
+    return &#123;
+      name: &#39;coderwhy&#39;
+    &#125;
+  &#125;
+&#125;)
+
+export default store
+</code></pre>
+<p>安装store：</p>
+<pre><code class="ts">createApp(App).use(router).use(store).mount(&#39;#app&#39;)
+</code></pre>
+<p>在App.vue中使用：</p>
+<pre><code class="html">&lt;h2&gt;&#123;&#123; $store.state.name &#125;&#125;&lt;/h2&gt;
+</code></pre>
+<h3 id="2-4-element-plus集成"><a href="#2-4-element-plus集成" class="headerlink" title="2.4. element-plus集成"></a>2.4. element-plus集成</h3><p>Element Plus，一套为开发者、设计师和产品经理准备的基于 Vue 3.0 的桌面端组件库：</p>
+<ul>
+<li>相信很多同学在Vue2中都使用过element-ui，而element-plus正是element-ui针对于vue3开发的一个UI组件库；</li>
+<li>它的使用方式和很多其他的组件库是一样的，所以学会element-plus，其他类似于ant-design-vue、NaiveUI、VantUI都是差不多的；</li>
+</ul>
+<p>安装element-plus</p>
+<pre><code class="shell">npm install element-plus
+</code></pre>
+<h4 id="2-4-1-全局引入"><a href="#2-4-1-全局引入" class="headerlink" title="2.4.1. 全局引入"></a>2.4.1. 全局引入</h4><p>一种引入element-plus的方式是全局引入，代表的含义是所有的组件和插件都会被自动注册：</p>
+<pre><code class="js">import ElementPlus from &#39;element-plus&#39;
+import &#39;element-plus/lib/theme-chalk/index.css&#39;
+
+import router from &#39;./router&#39;
+import store from &#39;./store&#39;
+
+createApp(App).use(router).use(store).use(ElementPlus).mount(&#39;#app&#39;)
+</code></pre>
+<h4 id="2-4-2-局部引入"><a href="#2-4-2-局部引入" class="headerlink" title="2.4.2. 局部引入"></a>2.4.2. 局部引入</h4><p>也就是在开发中用到某个组件对某个组件进行引入：</p>
+<pre><code class="vue">&lt;template&gt;
+  &lt;div id=&quot;app&quot;&gt;
+    &lt;router-link to=&quot;/login&quot;&gt;登录&lt;/router-link&gt;
+    &lt;router-link to=&quot;/main&quot;&gt;首页&lt;/router-link&gt;
+    &lt;router-view&gt;&lt;/router-view&gt;
+
+    &lt;h2&gt;&#123;&#123; $store.state.name &#125;&#125;&lt;/h2&gt;
+
+    &lt;el-button&gt;默认按钮&lt;/el-button&gt;
+    &lt;el-button type=&quot;primary&quot;&gt;主要按钮&lt;/el-button&gt;
+    &lt;el-button type=&quot;success&quot;&gt;成功按钮&lt;/el-button&gt;
+    &lt;el-button type=&quot;info&quot;&gt;信息按钮&lt;/el-button&gt;
+    &lt;el-button type=&quot;warning&quot;&gt;警告按钮&lt;/el-button&gt;
+    &lt;el-button type=&quot;danger&quot;&gt;危险按钮&lt;/el-button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script lang=&quot;ts&quot;&gt;
+import &#123; defineComponent &#125; from &#39;vue&#39;
+
+import &#123; ElButton &#125; from &#39;element-plus&#39;
+
+export default defineComponent(&#123;
+  name: &#39;App&#39;,
+  components: &#123;
+    ElButton
+  &#125;
+&#125;)
+&lt;/script&gt;
+
+&lt;style lang=&quot;less&quot;&gt;
+&lt;/style&gt;
+</code></pre>
+<p>但是我们会发现是没有对应的样式的，引入样式有两种方式：</p>
+<ul>
+<li>全局引用样式（像之前做的那样）；</li>
+<li>局部引用样式（通过babel的插件）；</li>
+</ul>
+<p>1.安装babel的插件：</p>
+<pre><code class="shell">npm install babel-plugin-import -D
+</code></pre>
+<p>2.配置babel.config.js</p>
+<pre><code class="js">module.exports = &#123;
+  plugins: [
+    [
+      &#39;import&#39;,
+      &#123;
+        libraryName: &#39;element-plus&#39;,
+        customStyleName: (name) =&gt; &#123;
+          return `element-plus/lib/theme-chalk/$&#123;name&#125;.css`
+        &#125;
+      &#125;
+    ]
+  ],
+  presets: [&#39;@vue/cli-plugin-babel/preset&#39;]
+&#125;
+</code></pre>
+<p>但是这里依然有个弊端：</p>
+<ul>
+<li>这些组件我们在多个页面或者组件中使用的时候，都需要导入并且在components中进行注册；</li>
+<li>所以我们可以将它们在全局注册一次；</li>
+</ul>
+<pre><code class="ts">import &#123;
+  ElButton,
+  ElTable,
+  ElAlert,
+  ElAside,
+  ElAutocomplete,
+  ElAvatar,
+  ElBacktop,
+  ElBadge,
+&#125; from &#39;element-plus&#39;
+
+const app = createApp(App)
+
+const components = [
+  ElButton,
+  ElTable,
+  ElAlert,
+  ElAside,
+  ElAutocomplete,
+  ElAvatar,
+  ElBacktop,
+  ElBadge
+]
+
+for (const cpn of components) &#123;
+  app.component(cpn.name, cpn)
+&#125;
+</code></pre>
+<h3 id="2-5-axios集成"><a href="#2-5-axios集成" class="headerlink" title="2.5. axios集成"></a>2.5. axios集成</h3><p>安装axios：</p>
+<pre><code class="shell">npm install axios
+</code></pre>
+<p>封装axios：</p>
+<pre><code class="ts">import axios, &#123; AxiosInstance, AxiosRequestConfig, AxiosResponse &#125; from &#39;axios&#39;
+import &#123; Result &#125; from &#39;./types&#39;
+import &#123; useUserStore &#125; from &#39;/@/store/modules/user&#39;
+
+class HYRequest &#123;
+  private instance: AxiosInstance
+
+  private readonly options: AxiosRequestConfig
+
+  constructor(options: AxiosRequestConfig) &#123;
+    this.options = options
+    this.instance = axios.create(options)
+
+    this.instance.interceptors.request.use(
+      (config) =&gt; &#123;
+        const token = useUserStore().getToken
+        if (token) &#123;
+          config.headers.Authorization = `Bearer $&#123;token&#125;`
+        &#125;
+        return config
+      &#125;,
+      (err) =&gt; &#123;
+        return err
+      &#125;
+    )
+
+    this.instance.interceptors.response.use(
+      (res) =&gt; &#123;
+        // 拦截响应的数据
+        if (res.data.code === 0) &#123;
+          return res.data.data
+        &#125;
+        return res.data
+      &#125;,
+      (err) =&gt; &#123;
+        return err
+      &#125;
+    )
+  &#125;
+
+  request&lt;T = any&gt;(config: AxiosRequestConfig): Promise&lt;T&gt; &#123;
+    return new Promise((resolve, reject) =&gt; &#123;
+      this.instance
+        .request&lt;any, AxiosResponse&lt;Result&lt;T&gt;&gt;&gt;(config)
+        .then((res) =&gt; &#123;
+          resolve((res as unknown) as Promise&lt;T&gt;)
+        &#125;)
+        .catch((err) =&gt; &#123;
+          reject(err)
+        &#125;)
+    &#125;)
+  &#125;
+
+  get&lt;T = any&gt;(config: AxiosRequestConfig): Promise&lt;T&gt; &#123;
+    return this.request(&#123; ...config, method: &#39;GET&#39; &#125;)
+  &#125;
+
+  post&lt;T = any&gt;(config: AxiosRequestConfig): Promise&lt;T&gt; &#123;
+    return this.request(&#123; ...config, method: &#39;POST&#39; &#125;)
+  &#125;
+
+  patch&lt;T = any&gt;(config: AxiosRequestConfig): Promise&lt;T&gt; &#123;
+    return this.request(&#123; ...config, method: &#39;PATCH&#39; &#125;)
+  &#125;
+
+  delete&lt;T = any&gt;(config: AxiosRequestConfig): Promise&lt;T&gt; &#123;
+    return this.request(&#123; ...config, method: &#39;DELETE&#39; &#125;)
+  &#125;
+&#125;
+
+export default HYRequest
+</code></pre>
+<h3 id="2-6-VSCode配置"><a href="#2-6-VSCode配置" class="headerlink" title="2.6. VSCode配置"></a>2.6. VSCode配置</h3><pre><code class="json">&#123;
+  &quot;workbench.iconTheme&quot;: &quot;vscode-great-icons&quot;,
+  &quot;editor.fontSize&quot;: 17,
+  &quot;eslint.migration.2_x&quot;: &quot;off&quot;,
+  &quot;[javascript]&quot;: &#123;
+    &quot;editor.defaultFormatter&quot;: &quot;dbaeumer.vscode-eslint&quot;
+  &#125;,
+  &quot;files.autoSave&quot;: &quot;afterDelay&quot;,
+  &quot;editor.tabSize&quot;: 2,
+  &quot;terminal.integrated.fontSize&quot;: 16,
+  &quot;editor.renderWhitespace&quot;: &quot;all&quot;,
+  &quot;editor.quickSuggestions&quot;: &#123;
+    &quot;strings&quot;: true
+  &#125;,
+  &quot;debug.console.fontSize&quot;: 15,
+  &quot;window.zoomLevel&quot;: 1,
+  &quot;emmet.includeLanguages&quot;: &#123;
+    &quot;javascript&quot;: &quot;javascriptreact&quot;
+  &#125;,
+  &quot;explorer.confirmDragAndDrop&quot;: false,
+  &quot;workbench.tree.indent&quot;: 16,
+  &quot;javascript.updateImportsOnFileMove.enabled&quot;: &quot;always&quot;,
+  &quot;editor.wordWrap&quot;: &quot;on&quot;,
+  &quot;path-intellisense.mappings&quot;: &#123;
+    &quot;@&quot;: &quot;$&#123;workspaceRoot&#125;/src&quot;
+  &#125;,
+  &quot;hediet.vscode-drawio.local-storage&quot;: &quot;eyIuZHJhd2lvLWNvbmZpZyI6IntcImxhbmd1YWdlXCI6XCJcIixcImN1c3RvbUZvbnRzXCI6W10sXCJsaWJyYXJpZXNcIjpcImdlbmVyYWw7YmFzaWM7YXJyb3dzMjtmbG93Y2hhcnQ7ZXI7c2l0ZW1hcDt1bWw7YnBtbjt3ZWJpY29uc1wiLFwiY3VzdG9tTGlicmFyaWVzXCI6W1wiTC5zY3JhdGNocGFkXCJdLFwicGx1Z2luc1wiOltdLFwicmVjZW50Q29sb3JzXCI6W1wiRkYwMDAwXCIsXCIwMENDNjZcIixcIm5vbmVcIixcIkNDRTVGRlwiLFwiNTI1MjUyXCIsXCJGRjMzMzNcIixcIjMzMzMzM1wiLFwiMzMwMDAwXCIsXCIwMENDQ0NcIixcIkZGNjZCM1wiLFwiRkZGRkZGMDBcIl0sXCJmb3JtYXRXaWR0aFwiOjI0MCxcImNyZWF0ZVRhcmdldFwiOmZhbHNlLFwicGFnZUZvcm1hdFwiOntcInhcIjowLFwieVwiOjAsXCJ3aWR0aFwiOjExNjksXCJoZWlnaHRcIjoxNjU0fSxcInNlYXJjaFwiOnRydWUsXCJzaG93U3RhcnRTY3JlZW5cIjp0cnVlLFwiZ3JpZENvbG9yXCI6XCIjZDBkMGQwXCIsXCJkYXJrR3JpZENvbG9yXCI6XCIjNmU2ZTZlXCIsXCJhdXRvc2F2ZVwiOnRydWUsXCJyZXNpemVJbWFnZXNcIjpudWxsLFwib3BlbkNvdW50ZXJcIjowLFwidmVyc2lvblwiOjE4LFwidW5pdFwiOjEsXCJpc1J1bGVyT25cIjpmYWxzZSxcInVpXCI6XCJcIn0ifQ==&quot;,
+  &quot;hediet.vscode-drawio.theme&quot;: &quot;Kennedy&quot;,
+  &quot;editor.fontFamily&quot;: &quot;Source Code Pro, &#39;Courier New&#39;, monospace&quot;,
+  &quot;editor.smoothScrolling&quot;: true,
+  &quot;editor.formatOnSave&quot;: true,
+  &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;,
+  &quot;workbench.colorTheme&quot;: &quot;Atom One Dark&quot;,
+  &quot;vetur.completion.autoImport&quot;: false,
+  &quot;security.workspace.trust.untrustedFiles&quot;: &quot;open&quot;,
+  &quot;eslint.lintTask.enable&quot;: true,
+  &quot;eslint.alwaysShowStatus&quot;: true,
+  &quot;editor.codeActionsOnSave&quot;: &#123;
+    &quot;source.fixAll.eslint&quot;: true
+  &#125;
+&#125;
+</code></pre>
+<h2 id="三-接口文档"><a href="#三-接口文档" class="headerlink" title="三. 接口文档"></a>三. 接口文档</h2><p><a target="_blank" rel="noopener" href="https://documenter.getpostman.com/view/12387168/TzsfmQvw">https://documenter.getpostman.com/view/12387168/TzsfmQvw</a></p>
+<p>baseURL的值：</p>
+<pre><code>http://152.136.185.210:5000
+</code></pre>
+<p>设置全局token的方法：</p>
+<pre><code class="js">const res = pm.response.json();
+pm.globals.set(&quot;token&quot;, res.data.token);
+</code></pre>
+<p>接口文档v2版本：（有部分更新）</p>
+<p><a target="_blank" rel="noopener" href="https://documenter.getpostman.com/view/12387168/TzzDKb12">https://documenter.getpostman.com/view/12387168/TzzDKb12</a></p>
+
+        </article>
+
+        
+            
+  <div class="nexmoe-post-copyright">
+    <strong>本文作者：</strong>diangen<br>
+    
+    <strong>本文链接：</strong><a href="http://example.com/post/34779958.html" title="http:&#x2F;&#x2F;example.com&#x2F;post&#x2F;34779958.html" target="_blank" rel="noopener">http:&#x2F;&#x2F;example.com&#x2F;post&#x2F;34779958.html</a><br>
+
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+        
+
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/vue/" rel="tag">vue</a>
+    
+</div>
+
+    <div class="nexmoe-post-footer">
+        <section class="nexmoe-comment">
+    <div class="valine"></div>
+<script src='https://lib.baomitu.com/valine/1.3.9/Valine.min.js'></script>
+<script>
+    // 使用方法 https://valine.js.org/quickstart.html
+    new Valine({
+        el: '.valine',
+        appId: 'A65v0zKrVxWX78TbGDhHUczD-gzGzoHsz',
+        appKey: 'D81sqZe7bgPM30XXKO98nli0'
+    })
+</script>
+</section>
+    </div>
+</div>
+
+
+        <div class="nexmoe-post-right">
+          
+            <div class="nexmoe-fixed">
+              <div class="nexmoe-tool">
+                <a href="#" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+              </div>
+            </div>
+          
+        </div>
+    </div>
+  </div>
+  <div id="nexmoe-pendant">
+    <div class="nexmoe-drawer mdui-drawer nexmoe-pd" id="drawer">
+        
+            <div class="nexmoe-pd-item">
+                <div class="clock">
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="needle" id="hours"></div>
+        <div class="needle" id="minutes"></div>
+        <div class="needle" id="seconds"></div>
+        <div class="clock_logo">
+
+        </div>
+
+    </div>
+<style>
+    .clock {
+        background-color: #ffffff;
+        width: 70vw;
+        height: 70vw;
+        max-width: 70vh;
+        max-height: 70vh;
+        border: solid 2.8vw #242424;
+        position: relative;
+        overflow: hidden;
+        border-radius: 50%;
+        box-sizing: border-box;
+        box-shadow: 0 1.4vw 2.8vw rgba(0, 0, 0, 0.8);
+        zoom:0.2
+    }
+
+    .memory {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-origin: center;
+    }
+
+    .memory:nth-child(1) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(0deg) translateY(-520%);
+    }
+
+    .memory:nth-child(2) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(6deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(3) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(12deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(4) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(18deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(5) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(24deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(6) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(30deg) translateY(-520%);
+    }
+
+    .memory:nth-child(7) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(36deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(8) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(42deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(9) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(48deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(10) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(54deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(11) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(60deg) translateY(-520%);
+    }
+
+    .memory:nth-child(12) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(66deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(13) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(72deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(14) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(78deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(15) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(84deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(16) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(90deg) translateY(-520%);
+    }
+
+    .memory:nth-child(17) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(96deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(18) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(102deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(19) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(108deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(20) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(114deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(21) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(120deg) translateY(-520%);
+    }
+
+    .memory:nth-child(22) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(126deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(23) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(132deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(24) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(138deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(25) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(144deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(26) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(150deg) translateY(-520%);
+    }
+
+    .memory:nth-child(27) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(156deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(28) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(162deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(29) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(168deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(30) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(174deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(31) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(180deg) translateY(-520%);
+    }
+
+    .memory:nth-child(32) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(186deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(33) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(192deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(34) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(198deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(35) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(204deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(36) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(210deg) translateY(-520%);
+    }
+
+    .memory:nth-child(37) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(216deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(38) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(222deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(39) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(228deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(40) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(234deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(41) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(240deg) translateY(-520%);
+    }
+
+    .memory:nth-child(42) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(246deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(43) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(252deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(44) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(258deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(45) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(264deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(46) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(270deg) translateY(-520%);
+    }
+
+    .memory:nth-child(47) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(276deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(48) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(282deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(49) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(288deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(50) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(294deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(51) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(300deg) translateY(-520%);
+    }
+
+    .memory:nth-child(52) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(306deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(53) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(312deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(54) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(318deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(55) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(324deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(56) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(330deg) translateY(-520%);
+    }
+
+    .memory:nth-child(57) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(336deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(58) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(342deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(59) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(348deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(60) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(354deg) translateY(-1461%);
+    }
+
+    .needle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-origin: center;
+    }
+
+    .needle#hours {
+        background-color: #1f1f1f;
+        width: 4%;
+        height: 30%;
+        transform-origin: center 75%;
+        transform: translate(-50%, -75%);
+    }
+
+    .needle#hours.moving {
+        transition: transform 150ms ease-out;
+    }
+
+    .needle#hours:after {
+        content: '';
+        background-color: #1f1f1f;
+        width: 4vw;
+        height: 4vw;
+        max-width: 4vh;
+        max-height: 4vh;
+        display: block;
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .needle#minutes {
+        background-color: #1f1f1f;
+        width: 2%;
+        height: 45%;
+        transform-origin: center 75%;
+        transform: translate(-50%, -75%);
+    }
+
+    .needle#minutes.moving {
+        transition: transform 150ms ease-out;
+    }
+
+    .needle#minutes:after {
+        content: '';
+        background-color: #1f1f1f;
+        width: 4vw;
+        height: 4vw;
+        max-width: 4vh;
+        max-height: 4vh;
+        display: block;
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .needle#seconds {
+        background-color: #cb2f2f;
+        width: 1%;
+        height: 50%;
+        transform-origin: center 75%;
+        transform: translate(-50%, -75%);
+    }
+
+    .needle#seconds.moving {
+        transition: transform 150ms ease-out;
+    }
+
+    .needle#seconds:after {
+        content: '';
+        background-color: #cb2f2f;
+        width: 2.5vw;
+        height: 2.5vw;
+        max-width: 2.5vh;
+        max-height: 2.5vh;
+        display: block;
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .clock_logo{
+        width: 10vw;
+        height: 10vw;
+        max-width: 10vh;
+        max-height: 10vh;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+    @media (min-width: 100vh) {
+        .clock {
+            border: solid 2.8vh #242424;
+            box-shadow: 0 1.4vh 2.8vh rgba(0, 0, 0, 0.8);
+        }
+    }
+
+</style>
+
+
+
+
+
+            </div>
+        
+            <div class="nexmoe-pd-item">
+                <div class="qweather" >
+    <div id="he-plugin-standard"></div>
+    <div class="qweather-logo">
+
+    </div>
+
+</div>
+<style>
+    .qweather{
+        position: relative;
+    }
+    .qweather-logo{
+        position: absolute;
+        right: 0;
+        top: -15px;
+        width: 40px;
+        height: 40px;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+</style>
+<script>
+  WIDGET = {
+    "CONFIG": {
+      "layout": "2",
+      "width": "260",
+      "height": "220",
+      "background": "5",
+      "dataColor": "e67249",
+      "borderRadius": "15",
+      "key": "931be7f8bb5d4e339dd4c3f680f10744"
+    }
+  }
+</script>
+<script src="https://widget.qweather.net/standard/static/js/he-standard-common.js?v=2.0"></script>
+
+            </div>
+        
+</div>
+<style>
+    .nexmoe-pd {
+        left: auto;
+        top: 40px;
+        right: 0;
+    }
+    .nexmoe-pd-item{
+       display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+</style>
+
+  </div>
+  <script src="https://lib.baomitu.com/lazysizes/5.1.0/lazysizes.min.js"></script>
+<script src="https://lib.baomitu.com/highlight.js/10.0.0/highlight.min.js"></script>
+<script src="https://lib.baomitu.com/mdui/0.4.3/js/mdui.min.js"></script>
+
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+
+<script src="https://lib.baomitu.com/jquery/3.5.1/jquery.slim.min.js"></script>
+<script src="/lib/fancybox/js/jquery.fancybox.min.js"></script>
+
+
+<script src="/js/app.js?v=1671030751576"></script>
+
+<script src="https://lib.baomitu.com/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+  
+
+
+
+
+
+<!-- hexo injector body_end start -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<script src="/js/search.js"></script>
+
+<script src="/js/clock.js"></script>
+
+<script src="https://lib.baomitu.com/clipboard.js/2.0.8/clipboard.min.js"></script>
+
+<script src="/lib/codeBlock/codeBlockFuction.js"></script>
+
+<script src="/lib/codeBlock/codeLang.js"></script>
+
+<script src="/lib/codeBlock/codeCopy.js"></script>
+
+<script src="/lib/codeBlock/codeShrink.js"></script>
+
+<link rel="stylesheet" href="/lib/codeBlock/matery.css">
+
+<script src="/js/webapp.js"></script>
+<!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+<script>(function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/051b1e60.js","daovoice")</script>
+<script>
+  daovoice('init', {
+    app_id: "051b1e60"
+  });
+  daovoice('update');
+</script>
+
