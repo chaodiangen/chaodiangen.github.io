@@ -54,7 +54,7 @@
     
     
     <entry>
-      <title>vue3+ts+webpack项目搭建</title>
+      <title>vue3+ts+webpack+项目打包和自动化部署</title>
       <link href="/post/34779958.html"/>
       <url>/post/34779958.html</url>
       
@@ -107,20 +107,9 @@
     
     
     <entry>
-      <title>关于我的</title>
-      <link href="/about.html"/>
-      <url>/about.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>我的朋友</title>
-      <link href="/friend.html"/>
-      <url>/friend.html</url>
+      <title>文章归档</title>
+      <link href="/archives.html"/>
+      <url>/archives.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -140,9 +129,20 @@
     
     
     <entry>
-      <title>文章归档</title>
-      <link href="/archives.html"/>
-      <url>/archives.html</url>
+      <title>关于我的</title>
+      <link href="/about.html"/>
+      <url>/about.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>我的朋友</title>
+      <link href="/friend.html"/>
+      <url>/friend.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
